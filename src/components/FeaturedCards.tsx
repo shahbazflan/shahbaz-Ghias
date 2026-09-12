@@ -30,14 +30,14 @@ export const FeaturedCards: React.FC<FeaturedCardsProps> = ({ onSelectTab }) => 
       {/* Section Header with Clean Figma Typography */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-neutral-800/80 gap-6">
         <div>
-          <div className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.25em] text-[#d85d3a] mb-2 font-semibold">
+          <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.2em] text-[#d85d3a] mb-2 font-light">
             <span>Portfolio Pillars</span>
           </div>
-          <h2 className="font-syne text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight uppercase">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight uppercase">
             Four Core Disciplines
           </h2>
         </div>
-        <p className="text-xs sm:text-sm text-neutral-400 max-w-md leading-relaxed font-normal">
+        <p className="text-xs sm:text-sm text-neutral-400 max-w-md leading-relaxed font-light">
           Explore curated gateways into synthetic ideation labs, broadcast master reels, commercial vertical campaigns, and creative career trajectory.
         </p>
       </div>
@@ -70,10 +70,10 @@ export const FeaturedCards: React.FC<FeaturedCardsProps> = ({ onSelectTab }) => 
 
                 {/* Index tag & Category Badge */}
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                  <span className="font-mono text-xs font-bold text-neutral-300 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded border border-neutral-800">
+                  <span className="text-xs font-light text-neutral-300 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded border border-neutral-800">
                     [{indexFormatted}]
                   </span>
-                  <span className="font-mono text-[11px] font-semibold tracking-wider uppercase bg-[#d85d3a]/90 text-white px-3 py-1 rounded shadow-sm">
+                  <span className="text-[11px] font-light tracking-wider uppercase bg-[#d85d3a]/90 text-white px-3 py-1 rounded shadow-sm">
                     {card.tag}
                   </span>
                 </div>
@@ -83,27 +83,27 @@ export const FeaturedCards: React.FC<FeaturedCardsProps> = ({ onSelectTab }) => 
               <div className="p-6 sm:p-8 relative z-10 flex-1 flex flex-col justify-between space-y-4 bg-[#090a0c]/80 border-t border-neutral-800/80">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-wider text-neutral-400">
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-wider text-neutral-400 font-light">
                       {getIcon(card.id)}
                       <span>{card.subtitle}</span>
                     </div>
                     <ArrowUpRight className="w-4 h-4 text-neutral-500 group-hover:text-[#d85d3a] transform group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                   </div>
 
-                  <h3 className="font-syne text-xl sm:text-2xl font-bold text-white group-hover:text-[#d85d3a] transition-colors">
+                  <h3 className="text-lg sm:text-xl font-normal text-white group-hover:text-[#d85d3a] transition-colors">
                     <ScrambleText text={card.title} hoverOnly />
                   </h3>
 
-                  <p className="text-sm text-neutral-400 leading-relaxed font-normal">
+                  <p className="text-xs sm:text-sm text-neutral-400 leading-relaxed font-light">
                     {card.description}
                   </p>
                 </div>
 
-                <div className="pt-3 border-t border-neutral-800/60 flex items-center justify-between font-mono text-xs">
+                <div className="pt-3 border-t border-neutral-800/60 flex items-center justify-between text-xs font-light">
                   <span className="text-neutral-400 group-hover:text-neutral-300 transition-colors">
                     ENTER DISCIPLINE
                   </span>
-                  <span className="text-[#d85d3a] font-bold group-hover:underline inline-flex items-center gap-1">
+                  <span className="text-[#d85d3a] font-normal group-hover:underline inline-flex items-center gap-1">
                     <span>VIEW PORTFOLIO</span>
                     <ArrowRight className="w-3.5 h-3.5" />
                   </span>

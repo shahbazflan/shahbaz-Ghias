@@ -21,19 +21,19 @@ export const UgcAdsView: React.FC<UgcAdsViewProps> = ({ onSelectVideo }) => {
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-800/80">
         <div className="max-w-2xl space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d85d3a]/15 text-[#d85d3a] border border-[#d85d3a]/30 text-xs font-mono font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d85d3a]/15 text-[#d85d3a] border border-[#d85d3a]/30 text-xs uppercase tracking-wider font-light">
             <Smartphone className="w-3.5 h-3.5" />
             <span>9:16 Vertical Video</span>
           </div>
-          <h1 className="font-syne text-3xl sm:text-5xl font-extrabold text-white tracking-tight uppercase">
+          <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight uppercase">
             UGC Ads &amp; Mobile Social Campaigns
           </h1>
-          <p className="text-base text-neutral-400 leading-relaxed font-normal">
+          <p className="text-sm sm:text-base text-neutral-400 leading-relaxed font-light">
             High-converting vertical video creatives engineered for TikTok, Instagram Reels, and YouTube Shorts algorithms. Hook-tested, color-graded, and kinetic caption synchronized.
           </p>
         </div>
 
-        <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs font-mono text-neutral-300">
+        <div className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs text-neutral-300 font-light">
           <Flame className="w-4 h-4 text-[#d85d3a]" />
           <span>Optimized for 3s Hook Rate &amp; Retention</span>
         </div>
@@ -76,13 +76,13 @@ export const UgcAdsView: React.FC<UgcAdsViewProps> = ({ onSelectVideo }) => {
 
                 {/* Bottom Overlay Label */}
                 <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-black/75 backdrop-blur-md border border-neutral-800 space-y-1">
-                  <div className="flex items-center justify-between text-white font-syne text-xs font-bold truncate">
+                  <div className="flex items-center justify-between text-white text-xs font-normal truncate">
                     <span className="truncate">
                       <ScrambleText text={ad.title} hoverOnly />
                     </span>
                     <ArrowUpRight className="w-3.5 h-3.5 text-[#d85d3a] shrink-0" />
                   </div>
-                  <p className="text-[11px] text-neutral-400 line-clamp-1">
+                  <p className="text-[11px] text-neutral-400 line-clamp-1 font-light">
                     {ad.description}
                   </p>
                 </div>
@@ -90,11 +90,11 @@ export const UgcAdsView: React.FC<UgcAdsViewProps> = ({ onSelectVideo }) => {
             </div>
 
             {/* Sub-card tags */}
-            <div className="mt-3 flex items-center justify-between px-1 text-xs font-mono text-neutral-400">
+            <div className="mt-3 flex items-center justify-between px-1 text-xs text-neutral-400 font-light">
               <span className="text-[10px] uppercase tracking-wider text-[#d85d3a]">
                 {ad.category}
               </span>
-              <span className="text-[11px] hover:text-white transition-colors">
+              <span className="text-[11px] hover:text-white transition-colors uppercase">
                 9:16 VERTICAL ↗
               </span>
             </div>
@@ -105,31 +105,31 @@ export const UgcAdsView: React.FC<UgcAdsViewProps> = ({ onSelectVideo }) => {
       {/* UGC Campaign Highlights */}
       <div className="p-8 rounded-2xl bg-neutral-900/60 border border-neutral-800 grid grid-cols-1 md:grid-cols-3 gap-6 text-neutral-300">
         <div className="space-y-2">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#d85d3a]">
+          <span className="text-xs uppercase tracking-wider text-[#d85d3a] font-light">
             01 / Fast Hooks
           </span>
-          <h3 className="font-syne text-base font-bold text-white">First 3-Second Retention</h3>
-          <p className="text-xs text-neutral-400 leading-relaxed">
+          <h3 className="text-base font-normal text-white">First 3-Second Retention</h3>
+          <p className="text-xs text-neutral-400 leading-relaxed font-light">
             High-stimulus visual pattern interrupts engineered to minimize feed scroll-away rate across TikTok and Reels.
           </p>
         </div>
 
         <div className="space-y-2">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#d85d3a]">
+          <span className="text-xs uppercase tracking-wider text-[#d85d3a] font-light">
             02 / Kinetic Subtitles
           </span>
-          <h3 className="font-syne text-base font-bold text-white">Sound-Off Comprehension</h3>
-          <p className="text-xs text-neutral-400 leading-relaxed">
+          <h3 className="text-base font-normal text-white">Sound-Off Comprehension</h3>
+          <p className="text-xs text-neutral-400 leading-relaxed font-light">
             Custom word-by-word animated highlights ensuring complete message transmission even when muted in public feeds.
           </p>
         </div>
 
         <div className="space-y-2">
-          <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#d85d3a]">
+          <span className="text-xs uppercase tracking-wider text-[#d85d3a] font-light">
             03 / Direct-Response
           </span>
-          <h3 className="font-syne text-base font-bold text-white">Clear Call-to-Actions</h3>
-          <p className="text-xs text-neutral-400 leading-relaxed">
+          <h3 className="text-base font-normal text-white">Clear Call-to-Actions</h3>
+          <p className="text-xs text-neutral-400 leading-relaxed font-light">
             Engineered end-screens and swipe-up prompts designed to boost click-through rates (CTR) and ROAS for commercial brands.
           </p>
         </div>

@@ -63,15 +63,15 @@ export const WorksArchiveList: React.FC<WorksArchiveListProps> = ({
                   <Play className="w-4 h-4 fill-current ml-0.5" />
                 </div>
               </div>
-              <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-black/80 text-[#d85d3a] border border-[#d85d3a]/30">
+              <span className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded text-[10px] uppercase tracking-wider bg-black/80 text-[#d85d3a] border border-[#d85d3a]/30 font-light">
                 {hoveredVideo.category}
               </span>
             </div>
             <div className="p-3 bg-neutral-950/90 border-t border-neutral-800">
-              <p className="font-display text-xs font-bold text-white truncate">
+              <p className="text-xs font-normal text-white truncate">
                 {hoveredVideo.title}
               </p>
-              <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5">
+              <p className="text-[11px] text-neutral-400 line-clamp-1 mt-0.5 font-light">
                 {hoveredVideo.description}
               </p>
             </div>
@@ -80,11 +80,11 @@ export const WorksArchiveList: React.FC<WorksArchiveListProps> = ({
       </AnimatePresence>
 
       {/* Editorial Table Header (Quentin Hocde style) */}
-      <div className="grid grid-cols-12 gap-4 pb-3 border-b border-neutral-800 font-mono text-[11px] uppercase tracking-widest text-neutral-400 select-none">
+      <div className="grid grid-cols-12 gap-4 pb-3 border-b border-neutral-800 text-[11px] uppercase tracking-wider text-neutral-400 select-none font-light">
         <div className="col-span-1">No.</div>
         <div className="col-span-6 sm:col-span-4 lg:col-span-4">Project / Title</div>
         <div className="hidden sm:block col-span-3 lg:col-span-3">Role / Focus</div>
-        <div className="hidden lg:block col-span-3">Pipeline & Tools</div>
+        <div className="hidden lg:block col-span-3">Pipeline &amp; Tools</div>
         <div className="col-span-5 sm:col-span-4 lg:col-span-1 text-right">Year</div>
       </div>
 
@@ -104,39 +104,39 @@ export const WorksArchiveList: React.FC<WorksArchiveListProps> = ({
               className="group grid grid-cols-12 gap-4 py-4 sm:py-4.5 items-center cursor-pointer transition-colors duration-200 hover:bg-neutral-900/50 px-2 rounded-lg"
             >
               {/* Index Number */}
-              <div className="col-span-1 font-mono text-xs text-neutral-500 group-hover:text-[#d85d3a] transition-colors">
+              <div className="col-span-1 text-xs text-neutral-500 group-hover:text-[#d85d3a] transition-colors font-light">
                 {formattedIndex}
               </div>
 
               {/* Title */}
               <div className="col-span-6 sm:col-span-4 lg:col-span-4 flex flex-col justify-center">
-                <span className="font-syne text-sm sm:text-base font-bold text-neutral-200 group-hover:text-white transition-colors flex items-center gap-1.5">
+                <span className="text-sm sm:text-base font-normal text-neutral-200 group-hover:text-white transition-colors flex items-center gap-1.5">
                   <ScrambleText text={video.title} hoverOnly />
                   <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 text-[#d85d3a] transition-opacity" />
                 </span>
-                <span className="sm:hidden font-mono text-[10px] text-neutral-400 mt-0.5">
+                <span className="sm:hidden text-[10px] uppercase tracking-wider text-neutral-400 mt-0.5 font-light">
                   {video.category} • {video.year || '2025'}
                 </span>
               </div>
 
               {/* Role / Focus */}
               <div className="hidden sm:flex col-span-3 lg:col-span-3 flex-col justify-center">
-                <span className="font-mono text-xs text-neutral-300 group-hover:text-white transition-colors">
+                <span className="text-xs text-neutral-300 group-hover:text-white transition-colors font-light">
                   {video.role || 'Visual Director & Animator'}
                 </span>
-                <span className="font-mono text-[10px] text-neutral-500">
+                <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-light">
                   {video.category}
                 </span>
               </div>
 
               {/* Pipeline Engine */}
-              <div className="hidden lg:block col-span-3 font-mono text-xs text-neutral-400 group-hover:text-neutral-300 transition-colors truncate">
+              <div className="hidden lg:block col-span-3 text-xs text-neutral-400 group-hover:text-neutral-300 transition-colors truncate font-light">
                 {pipeline}
               </div>
 
               {/* Year & Action */}
-              <div className="col-span-5 sm:col-span-4 lg:col-span-1 text-right flex items-center justify-end gap-2 font-mono text-xs">
-                <span className="text-neutral-400 group-hover:text-[#d85d3a] font-bold">
+              <div className="col-span-5 sm:col-span-4 lg:col-span-1 text-right flex items-center justify-end gap-2 text-xs font-light">
+                <span className="text-neutral-400 group-hover:text-[#d85d3a]">
                   {video.year || '2025'}
                 </span>
                 <div className="w-6 h-6 rounded-full bg-neutral-900 group-hover:bg-[#d85d3a] text-neutral-400 group-hover:text-white flex items-center justify-center transition-colors">

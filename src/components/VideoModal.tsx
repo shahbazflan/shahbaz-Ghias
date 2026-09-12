@@ -90,7 +90,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
               aria-label="Swipe down to dismiss"
             >
               <div className="w-12 h-1.5 rounded-full bg-neutral-600 active:bg-[#d85d3a] transition-colors" />
-              <div className="flex items-center gap-1 text-[10px] font-mono text-neutral-400 tracking-wider uppercase mt-1">
+              <div className="flex items-center gap-1 text-[10px] text-neutral-400 tracking-wider uppercase mt-1 font-light">
                 <ChevronDown className="w-3 h-3 text-[#d85d3a]" />
                 <span>Swipe down to close</span>
               </div>
@@ -103,10 +103,10 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
               onTouchEnd={handleTouchEnd}
             >
               <div className="flex items-center gap-2.5 truncate mr-3 pointer-events-none">
-                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wider uppercase bg-[#d85d3a]/20 text-[#d85d3a] border border-[#d85d3a]/30">
+                <span className="px-2.5 py-0.5 rounded-full text-[11px] font-light tracking-wider uppercase bg-[#d85d3a]/20 text-[#d85d3a] border border-[#d85d3a]/30">
                   {video.category}
                 </span>
-                <h3 className="font-display font-semibold text-sm sm:text-base text-white truncate">
+                <h3 className="font-normal text-sm sm:text-base text-white truncate">
                   {video.title}
                 </h3>
               </div>
@@ -137,20 +137,20 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
 
             {/* Footer details */}
             <div className="p-4 sm:p-5 bg-[#111317] space-y-3">
-              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-light">
                 {video.description}
               </p>
 
               <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-neutral-800/60">
                 {video.tools && video.tools.length > 0 && (
                   <div className="flex flex-wrap items-center gap-1.5">
-                    <span className="text-[11px] font-medium text-neutral-500 mr-1 flex items-center gap-1">
+                    <span className="text-[11px] font-light text-neutral-500 mr-1 flex items-center gap-1">
                       <Sparkles className="w-3 h-3 text-[#d85d3a]" /> Pipeline:
                     </span>
                     {video.tools.map((tool, idx) => (
                       <span
                         key={idx}
-                        className="px-2 py-0.5 rounded text-[11px] font-medium bg-neutral-800/80 text-neutral-300 border border-neutral-700/60"
+                        className="px-2 py-0.5 rounded text-[11px] font-light bg-neutral-800/80 text-neutral-300 border border-neutral-700/60"
                       >
                         {tool}
                       </span>
@@ -162,7 +162,7 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
                   href={`https://fast.wistia.net/embed/iframe/${video.id}`}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] font-medium text-neutral-400 hover:text-[#d85d3a] transition-colors ml-auto"
+                  className="inline-flex items-center gap-1 text-[11px] font-light text-neutral-400 hover:text-[#d85d3a] transition-colors ml-auto"
                 >
                   <ExternalLink className="w-3 h-3" />
                   <span>Direct Player</span>

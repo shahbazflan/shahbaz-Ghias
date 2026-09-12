@@ -67,15 +67,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
             variants={itemVariants}
             className="flex flex-wrap items-center justify-between gap-3 text-xs border-b border-neutral-800/80 pb-5"
           >
-            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-neutral-900/90 border border-neutral-800 text-neutral-300">
+            <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-neutral-900/90 border border-neutral-800 text-neutral-300 text-xs font-light uppercase tracking-wider">
               <span className="w-2 h-2 rounded-full bg-[#d85d3a]" />
-              <span className="font-medium tracking-wide">15+ Years UAE Agency Experience</span>
+              <span className="tracking-wider">15+ Years UAE Agency Experience</span>
             </div>
 
-            <div className="flex items-center gap-3 text-neutral-400 font-mono text-[11px]">
+            <div className="flex items-center gap-3 text-neutral-400 text-[11px] uppercase tracking-wider font-light">
               <span className="hidden sm:inline-block">DUBAI, UAE</span>
               <span className="hidden sm:inline-block text-neutral-600">•</span>
-              <span className="inline-flex items-center gap-1.5 text-neutral-300">
+              <span className="inline-flex items-center gap-1.5 text-neutral-300 font-light">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Available for Directing</span>
               </span>
@@ -83,20 +83,24 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
           </motion.div>
 
           {/* Main Headline Block with Refined Proportions and Fluid Motion */}
-          <div className="space-y-4">
-            <motion.div variants={itemVariants} className="py-2">
+          <div className="space-y-5 sm:space-y-6">
+            <motion.div variants={itemVariants} className="py-1">
               <GlassMagnifierHeadline text="Shahbaz Ahmed" />
             </motion.div>
 
-            <motion.div variants={itemVariants}>
-              <h2 className="font-syne text-xl sm:text-3xl md:text-4xl font-bold text-neutral-200 tracking-tight leading-snug">
-                Senior Motion Graphics Designer &amp; Visual Director
+            <motion.div variants={itemVariants} className="pt-1">
+              <h2
+                className="text-xl sm:text-3xl md:text-4xl lg:text-[2.65rem] text-neutral-200 tracking-tight leading-[1.1] font-normal uppercase flex flex-col select-none"
+              >
+                <span className="block">SENIOR MOTION</span>
+                <span className="block">GRAPHICS &amp;</span>
+                <span className="block">VISUAL DESIGNER</span>
               </h2>
             </motion.div>
 
             <motion.p
               variants={itemVariants}
-              className="text-base sm:text-lg text-neutral-400 font-normal leading-relaxed max-w-3xl pt-1"
+              className="text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-2xl pt-1"
             >
               Transforming complex brand ideas into magnetic screen experiences. Merging fifteen years of UAE broadcast commercial direction with high-precision motion design and next-generation synthetic cinematography.
             </motion.p>
@@ -104,14 +108,14 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
 
           {/* Core Disciplines Pill Tags (Clean Figma Layout) */}
           <motion.div variants={itemVariants} className="space-y-2.5">
-            <div className="font-mono text-[11px] uppercase tracking-widest text-[#d85d3a] font-semibold">
+            <div className="text-[11px] uppercase tracking-widest text-[#d85d3a] font-light">
               Specialized Disciplines
             </div>
             <div className="flex flex-wrap gap-2">
               {DISCIPLINES.map((item, idx) => (
                 <span
                   key={idx}
-                  className="px-3 py-1.5 rounded-lg bg-neutral-900/90 border border-neutral-800/90 text-neutral-300 hover:text-white hover:border-neutral-700 text-xs font-medium transition-colors"
+                  className="px-3 py-1.5 rounded-lg bg-neutral-900/90 border border-neutral-800/90 text-neutral-300 hover:text-white hover:border-neutral-700 text-xs font-light uppercase tracking-wider transition-colors"
                 >
                   {item}
                 </span>
@@ -126,22 +130,22 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
           >
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="space-y-1.5 max-w-2xl">
-                <span className="text-xs font-mono uppercase tracking-wider text-[#d85d3a] font-semibold">
+                <span className="text-xs uppercase tracking-wider text-[#d85d3a] font-light">
                   Creative Philosophy
                 </span>
-                <p className="text-sm sm:text-base text-neutral-200 font-medium leading-relaxed italic">
+                <p className="text-sm sm:text-base text-neutral-200 font-light leading-relaxed italic">
                   "{PERSONAL_INFO.heroTagline}"
                 </p>
-                <p className="text-xs sm:text-sm text-neutral-400 leading-normal">
+                <p className="text-xs sm:text-sm text-neutral-400 font-light leading-normal">
                   {PERSONAL_INFO.heroDescription}
                 </p>
               </div>
 
               <div className="flex sm:flex-col items-end justify-between sm:justify-center border-t sm:border-t-0 sm:border-l border-neutral-800 pt-3 sm:pt-0 sm:pl-6 gap-2 flex-shrink-0">
-                <span className="font-syne font-bold text-sm sm:text-base text-white">
+                <span className="font-normal text-sm sm:text-base text-white">
                   {PERSONAL_INFO.punchline}
                 </span>
-                <span className="text-[11px] font-mono text-neutral-500">
+                <span className="text-[11px] uppercase tracking-wider text-neutral-500 font-light">
                   15+ Years UAE Market
                 </span>
               </div>
@@ -156,27 +160,27 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
             <button
               id="hero-play-reel-btn"
               onClick={onPlayShowreel}
-              className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full text-xs sm:text-sm font-bold text-white bg-[#d85d3a] hover:bg-[#c24e2d] shadow-lg shadow-[#d85d3a]/25 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex items-center gap-2.5 px-5 sm:px-6 py-3 rounded-full text-xs uppercase tracking-wider text-white bg-[#d85d3a] hover:bg-[#c24e2d] shadow-lg shadow-[#d85d3a]/25 transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0 font-light"
             >
-              <Play className="w-4 h-4 fill-current ml-0.5" />
+              <Play className="w-3.5 h-3.5 fill-current ml-0.5" />
               <span>WATCH MASTER REEL (01:48)</span>
             </button>
 
             <button
               id="hero-explore-works-btn"
               onClick={scrollToWorks}
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full text-xs sm:text-sm font-semibold text-neutral-200 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700/80 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 rounded-full text-xs uppercase tracking-wider text-neutral-200 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700/80 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-0.5 font-light"
             >
               <span>Explore Selected Works</span>
-              <ArrowDown className="w-4 h-4 text-[#d85d3a]" />
+              <ArrowDown className="w-3.5 h-3.5 text-[#d85d3a]" />
             </button>
 
             <button
               onClick={() => onTabChange('about')}
-              className="inline-flex items-center gap-1.5 px-4 py-3.5 rounded-full text-xs sm:text-sm font-medium text-neutral-400 hover:text-white transition-colors"
+              className="inline-flex items-center gap-1.5 px-4 py-3 rounded-full text-xs uppercase tracking-wider text-neutral-400 hover:text-white transition-colors font-light"
             >
               <span>Profile &amp; Resume</span>
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </button>
           </motion.div>
         </motion.div>

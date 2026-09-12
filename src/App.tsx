@@ -15,6 +15,7 @@ import { MarqueeTicker } from './components/MarqueeTicker';
 import { PageTab, VideoItem } from './types';
 import { SHOWREEL_VIDEO, PERSONAL_INFO } from './data/portfolioData';
 import { Play, ArrowRight, List, Sliders, ArrowUpRight, Copy, Check } from 'lucide-react';
+import { KineticPillButton } from './components/KineticPillButton';
 
 export default function App() {
   const [currentTab, setCurrentTab] = useState<PageTab>('home');
@@ -163,46 +164,49 @@ export default function App() {
               {/* 6. Monumental Contact & Commission Send-off */}
               <section className="py-24 md:py-32 border-t border-neutral-800/80 bg-gradient-to-b from-transparent to-neutral-950/60">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center space-y-8">
-                  <div className="font-mono text-xs uppercase tracking-[0.3em] text-[#d85d3a] font-semibold">
+                  <div className="text-xs uppercase tracking-[0.2em] text-[#d85d3a] font-light">
                     Available for Directing &amp; Freelance Commissions
                   </div>
 
-                  <h2 className="font-syne text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight uppercase max-w-5xl mx-auto leading-[0.95]">
+                  <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight uppercase max-w-4xl mx-auto leading-[1.05]">
                     Let's Shape Visual Motion Together
                   </h2>
 
-                  <p className="text-base sm:text-lg text-neutral-400 max-w-2xl mx-auto leading-relaxed">
+                  <p className="text-sm sm:text-base text-neutral-400 font-light max-w-2xl mx-auto leading-relaxed">
                     Bringing 15+ years of UAE agency rigor and cutting-edge generative AI cinematics to your next commercial, brand anthem, or motion identity.
                   </p>
 
-                  <div className="flex flex-wrap items-center justify-center gap-4 pt-4 font-mono text-xs">
-                    <button
+                  <div className="flex flex-wrap items-center justify-center gap-3.5 pt-4 text-xs font-light">
+                    <KineticPillButton
+                      variant="email"
                       onClick={handleCopyEmail}
-                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-white text-black font-bold hover:bg-neutral-200 transition-colors shadow-xl"
+                      copied={copiedEmail}
+                      icon={
+                        copiedEmail ? (
+                          <Check className="w-4 h-4 text-emerald-100" />
+                        ) : (
+                          <Copy className="w-4 h-4" />
+                        )
+                      }
                     >
-                      {copiedEmail ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
-                      <span>{copiedEmail ? 'EMAIL COPIED TO CLIPBOARD' : PERSONAL_INFO.email}</span>
-                    </button>
+                      {copiedEmail ? 'EMAIL COPIED TO CLIPBOARD' : PERSONAL_INFO.email}
+                    </KineticPillButton>
 
-                    <a
+                    <KineticPillButton
+                      variant="linkedin"
                       href={PERSONAL_INFO.linkedin}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-neutral-900 hover:bg-neutral-800 text-neutral-200 hover:text-white border border-neutral-700 transition-colors"
+                      icon={<ArrowUpRight className="w-4 h-4 text-[#d85d3a]" />}
                     >
-                      <span>LINKEDIN PROFILE</span>
-                      <ArrowUpRight className="w-4 h-4 text-[#d85d3a]" />
-                    </a>
+                      LINKEDIN PROFILE
+                    </KineticPillButton>
 
-                    <a
+                    <KineticPillButton
+                      variant="canva"
                       href={PERSONAL_INFO.canvaPortfolio}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-neutral-900 hover:bg-neutral-800 text-neutral-200 hover:text-white border border-neutral-700 transition-colors"
+                      icon={<ArrowUpRight className="w-4 h-4 text-[#d85d3a]" />}
                     >
-                      <span>CANVA PORTFOLIO</span>
-                      <ArrowUpRight className="w-4 h-4 text-[#d85d3a]" />
-                    </a>
+                      CANVA PORTFOLIO
+                    </KineticPillButton>
                   </div>
                 </div>
               </section>

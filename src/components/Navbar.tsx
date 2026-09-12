@@ -61,10 +61,10 @@ const MagneticNavLink: React.FC<MagneticNavLinkProps> = ({ item, isActive, onSel
       onClick={onSelect}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative px-3.5 xl:px-4 py-2 font-syne text-xs uppercase tracking-wider rounded-full transition-colors duration-200 flex items-center gap-1.5 whitespace-nowrap select-none group ${
+      className={`relative px-3 xl:px-3.5 py-1.5 text-xs uppercase tracking-wider rounded-full transition-colors duration-200 flex items-center gap-1.5 whitespace-nowrap select-none group ${
         isActive
-          ? 'text-white font-extrabold'
-          : 'text-neutral-400 hover:text-white font-bold'
+          ? 'text-white font-normal'
+          : 'text-neutral-400 hover:text-white font-light'
       }`}
     >
       {isActive && (
@@ -81,8 +81,8 @@ const MagneticNavLink: React.FC<MagneticNavLinkProps> = ({ item, isActive, onSel
         transition={{ type: 'spring', stiffness: 380, damping: 18, mass: 0.15 }}
       >
         <span
-          className={`text-[11px] font-mono transition-colors ${
-            isActive ? 'text-white/90 font-bold' : 'text-neutral-500 group-hover:text-neutral-300 font-medium'
+          className={`text-[10px] transition-colors ${
+            isActive ? 'text-white/90 font-normal' : 'text-neutral-500 group-hover:text-neutral-300 font-light'
           }`}
         >
           {item.num}
@@ -188,18 +188,18 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
           }}
           className="flex items-center gap-3 group text-left focus:outline-none shrink-0"
         >
-          <div className="w-9 h-9 rounded-lg bg-neutral-900 border border-neutral-700/80 group-hover:border-[#d85d3a] flex items-center justify-center text-white font-mono text-xs font-bold tracking-widest transition-colors duration-300">
+          <div className="w-9 h-9 rounded-lg bg-neutral-900 border border-neutral-700/80 group-hover:border-[#d85d3a] flex items-center justify-center text-white text-xs font-light tracking-widest transition-colors duration-300">
             SA
           </div>
           <div>
             <div className="flex items-center gap-2">
               <ScrambleText
                 text={PERSONAL_INFO.name}
-                className="font-syne font-extrabold text-sm sm:text-base tracking-tight text-white uppercase"
+                className="font-name-zalando font-extrabold text-sm sm:text-base tracking-tight text-white uppercase"
               />
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" title="Available for projects" />
             </div>
-            <p className="font-mono text-[10px] text-neutral-400 tracking-wider uppercase">
+            <p className="text-[10px] text-neutral-400 tracking-wider uppercase font-light">
               Motion Director • Dubai ({dubaiClock} GST)
             </p>
           </div>
@@ -226,7 +226,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#121417]/90 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 text-xs font-syne font-bold tracking-wider transition-all duration-200 whitespace-nowrap shadow-sm group"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121417]/90 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 text-xs font-light tracking-wider transition-all duration-200 whitespace-nowrap shadow-sm group"
               title="LinkedIn Profile"
             >
               <span>
@@ -240,7 +240,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
               href={PERSONAL_INFO.canvaPortfolio}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#121417]/90 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 text-xs font-syne font-bold tracking-wider transition-all duration-200 whitespace-nowrap shadow-sm group"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121417]/90 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 text-xs font-light tracking-wider transition-all duration-200 whitespace-nowrap shadow-sm group"
               title="Canva Portfolio"
             >
               <span>
@@ -252,7 +252,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
             <MagneticActionLink
               id="nav-action-contact"
               href={`mailto:${PERSONAL_INFO.email}`}
-              className="inline-flex items-center gap-1.5 px-5 py-2 rounded-full font-syne text-xs font-extrabold uppercase tracking-wider text-white bg-[#d85d3a] hover:bg-[#c24e2d] transition-all shadow-lg shadow-[#d85d3a]/30 whitespace-nowrap shrink-0 hover:scale-[1.02] active:scale-[0.98] group"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-normal uppercase tracking-wider text-white bg-[#d85d3a] hover:bg-[#c24e2d] transition-all shadow-lg shadow-[#d85d3a]/30 whitespace-nowrap shrink-0 hover:scale-[1.02] active:scale-[0.98] group"
               title="Direct Email Contact"
             >
               <span>
@@ -284,7 +284,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
             transition={{ duration: 0.3 }}
             className="lg:hidden bg-[#090a0c] border-b border-neutral-800 px-6 py-6 space-y-4"
           >
-            <div className="font-mono text-[11px] text-neutral-400 uppercase tracking-widest">
+            <div className="font-syne text-[11px] text-neutral-400 uppercase tracking-widest font-semibold">
               // Navigation
             </div>
             <nav className="flex flex-col space-y-2">
@@ -303,7 +303,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
                 >
                   <div className="flex items-center gap-2.5">
                     <span
-                      className={`font-mono text-xs ${
+                      className={`font-syne text-xs font-semibold ${
                         currentTab === item.id ? 'text-white/80 font-bold' : 'text-neutral-500'
                       }`}
                     >

@@ -90,16 +90,21 @@ export const GlassMagnifierHeadline: React.FC<GlassMagnifierHeadlineProps> = ({
   const textRotateX = isHovered ? -normY * 6 : 0;
 
   // Break words into discrete spans with identical styling across both layers
-  // This ensures "SHAHBAZ" and "AHMED" are BOTH 100% magnified regardless of screen width
+  // This ensures "SHAHBAZ" and "AHMED" are stacked vertically matching the typographic reference
   const words = text.trim().split(/\s+/);
   const word1 = words[0] || 'SHAHBAZ';
   const word2 = words.slice(1).join(' ') || 'AHMED';
 
   const renderTextContent = (isMagnified = false) => (
     <div
-      className={`flex flex-wrap items-baseline gap-x-4 sm:gap-x-6 tracking-tight leading-[1.02] uppercase font-syne text-4xl sm:text-6xl md:text-7xl lg:text-[5rem] font-extrabold select-none ${
+      className={`flex flex-col tracking-tight leading-[0.88] uppercase font-name-zalando text-5xl sm:text-7xl md:text-8xl lg:text-[6.75rem] font-extrabold select-none ${
         isMagnified ? 'text-white' : 'text-white'
       }`}
+      style={{
+        fontFamily: "'Zalando Sans Expanded', 'Zalando Sans', system-ui, -apple-system, sans-serif",
+        fontWeight: 800,
+        fontStretch: 'expanded',
+      }}
     >
       <span className="inline-block transition-transform duration-75">
         {word1}

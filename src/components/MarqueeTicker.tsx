@@ -203,7 +203,7 @@ export const MarqueeTicker: React.FC = () => {
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-[#090a0c] to-transparent z-20" />
 
       {/* Swipe Interactive Indicator Pill (Subtle visual affordance on mobile/touch) */}
-      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30 pointer-events-none hidden lg:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-[10px] font-mono text-neutral-400 opacity-60 hover:opacity-100 transition-opacity">
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30 pointer-events-none hidden lg:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-[10px] font-light text-neutral-400 opacity-60 hover:opacity-100 transition-opacity">
         <MoveHorizontal className="w-3 h-3 text-[#d85d3a]" />
         <span>SWIPE TO SCROLL</span>
       </div>
@@ -220,7 +220,7 @@ export const MarqueeTicker: React.FC = () => {
               <span className="opacity-70 group-hover:opacity-100 transition-opacity">
                 {item.icon}
               </span>
-              <span className="font-mono text-xs tracking-[0.2em] font-semibold text-neutral-400 group-hover:text-white transition-colors uppercase">
+              <span className="text-xs tracking-wider font-light text-neutral-400 group-hover:text-white transition-colors uppercase">
                 {item.label}
               </span>
               <span className="text-neutral-700 mx-2 text-xs">/</span>
@@ -235,7 +235,7 @@ export const MarqueeTicker: React.FC = () => {
               <span className="opacity-70 group-hover:opacity-100 transition-opacity">
                 {item.icon}
               </span>
-              <span className="font-mono text-xs tracking-[0.2em] font-semibold text-neutral-400 group-hover:text-white transition-colors uppercase">
+              <span className="text-xs tracking-wider font-light text-neutral-400 group-hover:text-white transition-colors uppercase">
                 {item.label}
               </span>
               <span className="text-neutral-700 mx-2 text-xs">/</span>
@@ -250,7 +250,7 @@ export const MarqueeTicker: React.FC = () => {
               <span className="opacity-70 group-hover:opacity-100 transition-opacity">
                 {item.icon}
               </span>
-              <span className="font-mono text-xs tracking-[0.2em] font-semibold text-neutral-400 group-hover:text-white transition-colors uppercase">
+              <span className="text-xs tracking-wider font-light text-neutral-400 group-hover:text-white transition-colors uppercase">
                 {item.label}
               </span>
               <span className="text-neutral-700 mx-2 text-xs">/</span>
@@ -265,7 +265,7 @@ export const MarqueeTicker: React.FC = () => {
               <span className="opacity-70 group-hover:opacity-100 transition-opacity">
                 {item.icon}
               </span>
-              <span className="font-mono text-xs tracking-[0.2em] font-semibold text-neutral-400 group-hover:text-white transition-colors uppercase">
+              <span className="text-xs tracking-wider font-light text-neutral-400 group-hover:text-white transition-colors uppercase">
                 {item.label}
               </span>
               <span className="text-neutral-700 mx-2 text-xs">/</span>

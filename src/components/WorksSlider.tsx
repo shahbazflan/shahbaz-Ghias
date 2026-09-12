@@ -169,7 +169,7 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
             scale: isDragging ? 1.15 : 1,
           }}
           transition={{ type: 'spring', stiffness: 450, damping: 32, mass: 0.2 }}
-          className="pointer-events-none fixed z-50 hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d85d3a] text-white font-mono text-[10px] font-bold tracking-widest shadow-xl shadow-[#d85d3a]/30 uppercase"
+          className="pointer-events-none fixed z-50 hidden md:flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#d85d3a] text-white font-syne text-[10px] font-extrabold tracking-widest shadow-xl shadow-[#d85d3a]/30 uppercase"
         >
           {hoveredCardIndex === activeIndex ? (
             <>
@@ -184,39 +184,6 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
           )}
         </motion.div>
       )}
-
-      {/* Top Header Bar inside Slider */}
-      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-12 flex items-center justify-between z-20">
-        <div className="flex items-center gap-3">
-          <span className="font-mono text-xs font-bold text-neutral-400">
-            [ {String(activeIndex + 1).padStart(2, '0')} / {String(total).padStart(2, '0')} ]
-          </span>
-          <span className="h-3 w-px bg-neutral-800" />
-          <span className="font-mono text-[11px] text-[#d85d3a] tracking-wider uppercase font-semibold">
-            {activeVideo.category}
-          </span>
-        </div>
-
-        {/* View Switchers & Shortcuts */}
-        <div className="flex items-center gap-2 font-mono text-xs">
-          {onSwitchToArchive && (
-            <button
-              onClick={onSwitchToArchive}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-neutral-900/90 hover:bg-neutral-800 border border-neutral-800 text-neutral-300 hover:text-white transition-colors"
-            >
-              <List className="w-3.5 h-3.5 text-[#d85d3a]" />
-              <span>SWITCH TO ARCHIVE TABLE</span>
-            </button>
-          )}
-
-          <div className="hidden sm:flex items-center gap-1 text-[11px] text-neutral-500 pl-2">
-            <span>USE</span>
-            <kbd className="px-1.5 py-0.5 rounded bg-neutral-900 border border-neutral-800 text-neutral-300 font-mono">←</kbd>
-            <kbd className="px-1.5 py-0.5 rounded bg-neutral-900 border border-neutral-800 text-neutral-300 font-mono">→</kbd>
-            <span>OR DRAG</span>
-          </div>
-        </div>
-      </div>
 
       {/* PERSPECTIVE CAROUSEL TRACK (Quentin Hocde signature perspective) */}
       <div
@@ -328,10 +295,10 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
 
                 {/* Top Corner Badges */}
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                  <span className="font-mono text-xs font-bold text-neutral-200 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded border border-neutral-800">
+                  <span className="text-xs font-light text-neutral-200 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded border border-neutral-800">
                     [{String(idx + 1).padStart(2, '0')}]
                   </span>
-                  <span className="font-mono text-[10px] tracking-wider uppercase bg-[#d85d3a]/90 text-white font-bold px-2.5 py-0.5 rounded shadow-sm">
+                  <span className="text-[10px] tracking-wider uppercase bg-[#d85d3a]/90 text-white font-light px-2.5 py-0.5 rounded shadow-sm">
                     {video.year || '2025'}
                   </span>
                 </div>
@@ -339,7 +306,7 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
                 {/* Bottom Tag Preview for Inactive Cards */}
                 {!isCenter && (
                   <div className="absolute bottom-3 left-3 right-3 text-center">
-                    <p className="font-syne text-xs font-bold text-neutral-300 truncate">
+                    <p className="text-xs font-light text-neutral-300 truncate">
                       {video.title}
                     </p>
                   </div>
@@ -390,7 +357,7 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
                 onClick={() => onSelectVideo(activeVideo)}
                 className="group text-left focus:outline-none flex items-center gap-3"
               >
-                <h2 className="font-syne text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white group-hover:text-[#d85d3a] tracking-tight uppercase transition-colors">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-white group-hover:text-[#d85d3a] tracking-tight uppercase transition-colors">
                   <ScrambleText text={activeVideo.title} />
                 </h2>
                 <div className="w-8 h-8 rounded-full bg-neutral-900 group-hover:bg-[#d85d3a] border border-neutral-800 group-hover:border-[#d85d3a] flex items-center justify-center text-neutral-400 group-hover:text-white transition-all flex-shrink-0">
@@ -398,59 +365,59 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
                 </div>
               </button>
 
-              <p className="text-xs text-neutral-400 max-w-md font-normal leading-relaxed">
+              <p className="text-xs text-neutral-400 max-w-md font-light leading-relaxed">
                 {activeVideo.description}
               </p>
             </div>
 
             {/* Quentin Hocde 5-Column Metadata Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-12 gap-4 lg:gap-6 font-mono text-xs">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-12 gap-4 lg:gap-6 text-xs uppercase tracking-wider font-light">
               {/* 1. ROLE (col-span-2) */}
               <div className="lg:col-span-3 space-y-1">
-                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold">
+                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-light">
                   Role
                 </p>
-                <p className="text-neutral-200 font-medium">
+                <p className="text-neutral-200 font-light normal-case">
                   {activeVideo.role || 'Senior Visual Director & Lead Motion'}
                 </p>
               </div>
 
               {/* 2. RECOGNITIONS / CATEGORY (col-span-3) */}
               <div className="lg:col-span-3 space-y-1">
-                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold">
+                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-light">
                   Category / Focus
                 </p>
-                <p className="text-neutral-200 font-medium">
+                <p className="text-neutral-200 font-light normal-case">
                   {activeVideo.recognitions || activeVideo.category}
                 </p>
               </div>
 
               {/* 3. CONTEXT (col-span-3) */}
               <div className="lg:col-span-3 space-y-1">
-                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold">
+                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-light">
                   Context
                 </p>
-                <p className="text-neutral-200 font-medium">
+                <p className="text-neutral-200 font-light normal-case">
                   {activeVideo.context || '15+ Years UAE Agency & Commercial Compilation'}
                 </p>
               </div>
 
               {/* 4. PIPELINE (col-span-2) */}
               <div className="lg:col-span-2 space-y-1">
-                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold">
+                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-light">
                   Pipeline
                 </p>
-                <p className="text-neutral-200 font-medium truncate" title={activeVideo.tools?.join(', ')}>
+                <p className="text-neutral-200 font-light truncate normal-case" title={activeVideo.tools?.join(', ')}>
                   {activeVideo.tools?.slice(0, 3).join(', ') || 'After Effects, Premiere Pro'}
                 </p>
               </div>
 
               {/* 5. YEAR (col-span-1 text-right) */}
               <div className="lg:col-span-1 text-left sm:text-right space-y-1">
-                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-semibold">
+                <p className="text-[10px] uppercase tracking-wider text-neutral-500 font-light">
                   Year
                 </p>
-                <p className="text-[#d85d3a] font-bold">
+                <p className="text-[#d85d3a] font-normal">
                   {activeVideo.year || '2025'}
                 </p>
               </div>
@@ -459,7 +426,7 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
         </AnimatePresence>
 
         {/* Bottom scrub timeline / progress pill track */}
-        <div className="mt-6 flex items-center justify-between pt-4 border-t border-neutral-900 font-mono text-[11px] text-neutral-500">
+        <div className="mt-6 flex items-center justify-between pt-4 border-t border-neutral-900 text-[11px] text-neutral-500 uppercase tracking-wider font-light">
           <div className="flex items-center gap-1.5 overflow-x-auto max-w-md scrollbar-none py-1">
             {videos.map((_, i) => (
               <button
@@ -478,7 +445,7 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
           <div className="flex items-center gap-3">
             <button
               onClick={() => onSelectVideo(activeVideo)}
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-white bg-[#d85d3a] hover:bg-[#c24e2d] px-4 py-1.5 rounded-full transition-colors shadow-md shadow-[#d85d3a]/25"
+              className="inline-flex items-center gap-1.5 text-xs font-light text-white bg-[#d85d3a] hover:bg-[#c24e2d] px-3.5 py-1.5 rounded-full transition-colors shadow-md shadow-[#d85d3a]/25"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>WATCH REEL</span>

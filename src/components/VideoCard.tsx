@@ -52,11 +52,11 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, onClick, index }) =
             <Play className="w-4 h-4 fill-current ml-0.5" />
           </div>
         </div>
-        <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded text-[10px] font-mono uppercase tracking-wider bg-black/75 backdrop-blur-md text-[#d85d3a] border border-[#d85d3a]/30">
+        <span className="absolute top-3 left-3 px-2.5 py-0.5 rounded text-[10px] uppercase tracking-wider bg-black/75 backdrop-blur-md text-[#d85d3a] border border-[#d85d3a]/30 font-light">
           {video.category}
         </span>
         {video.year && (
-          <span className="absolute top-3 right-3 font-mono text-[10px] text-neutral-300 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-neutral-800">
+          <span className="absolute top-3 right-3 text-[10px] text-neutral-300 bg-black/60 backdrop-blur-md px-2 py-0.5 rounded border border-neutral-800 font-light uppercase tracking-wider">
             {video.year}
           </span>
         )}
@@ -64,17 +64,17 @@ export const VideoCard: React.FC<VideoCardProps> = ({ video, onClick, index }) =
 
       <div className="p-5 space-y-2 bg-[#090a0c]/90 border-t border-neutral-800/80">
         <div className="flex items-center justify-between gap-2">
-          <h3 className="font-syne text-base font-bold text-white group-hover:text-[#d85d3a] transition-colors truncate">
+          <h3 className="text-base font-normal text-white group-hover:text-[#d85d3a] transition-colors truncate">
             <ScrambleText text={video.title} hoverOnly />
           </h3>
           <ArrowUpRight className="w-4 h-4 text-neutral-500 group-hover:text-[#d85d3a] transition-colors flex-shrink-0" />
         </div>
         {video.role && (
-          <p className="font-mono text-[11px] text-neutral-400">
+          <p className="text-[11px] text-neutral-400 uppercase tracking-wider font-light">
             {video.role}
           </p>
         )}
-        <p className="text-xs text-neutral-400 line-clamp-2 leading-relaxed">
+        <p className="text-xs text-neutral-400 line-clamp-2 leading-relaxed font-light">
           {video.description}
         </p>
       </div>

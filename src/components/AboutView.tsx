@@ -60,11 +60,11 @@ export const AboutView: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
               <div className="relative z-10 w-full p-4 text-center space-y-0.5">
-                <span className="font-syne font-bold text-lg text-white block">Shahbaz Ahmed</span>
-                <span className="text-xs text-neutral-300 font-mono block">Senior Visual Director</span>
+                <span className="font-normal text-base sm:text-lg text-white block">Shahbaz Ahmed</span>
+                <span className="text-xs text-neutral-300 font-light block">Senior Visual Director</span>
               </div>
 
-              <div className="absolute top-3 right-3 py-1 px-2.5 rounded-full bg-black/70 backdrop-blur-md border border-neutral-700/60 flex items-center gap-1.5 text-[10px] font-mono">
+              <div className="absolute top-3 right-3 py-1 px-2.5 rounded-full bg-black/70 backdrop-blur-md border border-neutral-700/60 flex items-center gap-1.5 text-[10px] font-light">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span className="text-emerald-400">Available</span>
               </div>
@@ -73,12 +73,12 @@ export const AboutView: React.FC = () => {
             {/* Quick Metrics */}
             <div className="grid grid-cols-2 gap-3 mt-4">
               <div className="p-3 rounded-xl bg-neutral-800/50 border border-neutral-700/60 text-center">
-                <span className="font-display font-black text-xl text-[#d85d3a] block">15+</span>
-                <span className="text-[11px] text-neutral-400">Years Experience</span>
+                <span className="font-extrabold text-xl text-[#d85d3a] block">15+</span>
+                <span className="text-[11px] text-neutral-400 font-light">Years Experience</span>
               </div>
               <div className="p-3 rounded-xl bg-neutral-800/50 border border-neutral-700/60 text-center">
-                <span className="font-display font-black text-xl text-white block">UAE</span>
-                <span className="text-[11px] text-neutral-400">Market Experience</span>
+                <span className="font-extrabold text-xl text-white block">UAE</span>
+                <span className="text-[11px] text-neutral-400 font-light">Market Experience</span>
               </div>
             </div>
 
@@ -87,7 +87,7 @@ export const AboutView: React.FC = () => {
               <button
                 id="copy-email-btn"
                 onClick={handleCopyEmail}
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-neutral-800 hover:bg-neutral-700 text-neutral-200 transition-colors"
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-light bg-neutral-800 hover:bg-neutral-700 text-neutral-200 transition-colors"
               >
                 <div className="flex items-center gap-2 truncate">
                   <Mail className="w-4 h-4 text-[#d85d3a] shrink-0" />
@@ -101,7 +101,7 @@ export const AboutView: React.FC = () => {
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-[#0077b5]/15 border border-[#0077b5]/30 text-white hover:bg-[#0077b5]/25 transition-colors"
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-light bg-[#0077b5]/15 border border-[#0077b5]/30 text-white hover:bg-[#0077b5]/25 transition-colors"
               >
                 <div className="flex items-center gap-2">
                   <Linkedin className="w-4 h-4 text-[#0077b5]" />
@@ -115,7 +115,7 @@ export const AboutView: React.FC = () => {
                 href={PERSONAL_INFO.canvaPortfolio}
                 target="_blank"
                 rel="noreferrer"
-                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-neutral-800/80 hover:bg-neutral-700/80 text-neutral-200 border border-neutral-700/60 transition-colors"
+                className="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-light bg-neutral-800/80 hover:bg-neutral-700/80 text-neutral-200 border border-neutral-700/60 transition-colors"
               >
                 <div className="flex items-center gap-2">
                   <Globe className="w-4 h-4 text-[#d85d3a]" />
@@ -130,19 +130,19 @@ export const AboutView: React.FC = () => {
         {/* Right Column: Bio Narrative */}
         <div className="lg:col-span-8 space-y-8">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d85d3a]/15 text-[#d85d3a] border border-[#d85d3a]/30 text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d85d3a]/15 text-[#d85d3a] border border-[#d85d3a]/30 text-xs font-light uppercase tracking-wider">
               <User className="w-3.5 h-3.5" />
               <span>Executive Profile</span>
             </div>
-            <h1 className="font-display text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Hi, I'm <span className="text-[#d85d3a]">Shahbaz Ahmed</span>
+            <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Hi, I'm <span className="text-[#d85d3a] font-extrabold">Shahbaz Ahmed</span>
             </h1>
-            <p className="font-display text-lg text-neutral-300 font-semibold">
+            <p className="text-base sm:text-lg text-neutral-300 font-light">
               Senior Motion Graphics Designer &amp; Visual Director
             </p>
           </div>
 
-          <div className="space-y-4 text-sm sm:text-base text-neutral-300 leading-relaxed">
+          <div className="space-y-4 text-sm sm:text-base text-neutral-300 leading-relaxed font-light">
             <p>{PERSONAL_INFO.bioFull}</p>
           </div>
 
@@ -150,11 +150,11 @@ export const AboutView: React.FC = () => {
           <div className="p-6 rounded-2xl bg-neutral-900/80 border border-neutral-800 space-y-3">
             <div className="flex items-center gap-2 text-[#d85d3a]">
               <Award className="w-4 h-4" />
-              <h3 className="font-display text-xs font-bold uppercase tracking-wider text-white">
+              <h3 className="text-xs font-normal uppercase tracking-wider text-white">
                 Market Heritage
               </h3>
             </div>
-            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed">
+            <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-light">
               {PERSONAL_INFO.profileStatement}
             </p>
           </div>
@@ -163,7 +163,7 @@ export const AboutView: React.FC = () => {
           <div className="space-y-4 pt-4 border-t border-neutral-800/80">
             <div className="flex items-center gap-2 text-[#d85d3a]">
               <GraduationCap className="w-4 h-4" />
-              <h3 className="font-display text-xs font-bold uppercase tracking-wider text-white">
+              <h3 className="text-xs font-normal uppercase tracking-wider text-white">
                 Education &amp; Academic Training
               </h3>
             </div>
@@ -173,11 +173,11 @@ export const AboutView: React.FC = () => {
                   key={idx}
                   className="p-4 rounded-xl bg-neutral-900 border border-neutral-800 space-y-1"
                 >
-                  <span className="font-display text-xs font-bold text-white block">
+                  <span className="text-xs font-normal text-white block">
                     {edu.institution}
                   </span>
-                  <p className="text-xs text-[#d85d3a] font-medium">{edu.degree}</p>
-                  <p className="text-[11px] text-neutral-500">
+                  <p className="text-xs text-[#d85d3a] font-light">{edu.degree}</p>
+                  <p className="text-[11px] text-neutral-500 font-light">
                     {edu.location} {edu.period ? `• ${edu.period}` : ''}
                   </p>
                 </div>
@@ -190,14 +190,14 @@ export const AboutView: React.FC = () => {
       {/* Software & Generative AI Toolkit */}
       <div className="space-y-8 pt-8 border-t border-neutral-800/80">
         <div className="max-w-2xl space-y-2">
-          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#d85d3a]">
+          <div className="inline-flex items-center gap-2 text-xs font-light uppercase tracking-widest text-[#d85d3a]">
             <Wrench className="w-3.5 h-3.5" />
             <span>Technical Capabilities</span>
           </div>
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase">
             Software &amp; Generative AI Expertise
           </h2>
-          <p className="text-xs sm:text-sm text-neutral-400">
+          <p className="text-xs sm:text-sm text-neutral-400 font-light">
             A comprehensive dual-engine mastery bridging traditional broadcast software with next-generation generative AI pipelines.
           </p>
         </div>
@@ -209,12 +209,12 @@ export const AboutView: React.FC = () => {
               className="p-6 rounded-2xl bg-neutral-900/70 border border-neutral-800 flex flex-col justify-between space-y-4"
             >
               <div className="space-y-2">
-                <h3 className="font-display text-base font-bold text-white flex items-center gap-2">
+                <h3 className="text-base font-normal text-white flex items-center gap-2">
                   <Sparkles className="w-4 h-4 text-[#d85d3a]" />
                   {cat.title}
                 </h3>
                 {cat.description && (
-                  <p className="text-xs text-neutral-400 leading-relaxed">
+                  <p className="text-xs text-neutral-400 leading-relaxed font-light">
                     {cat.description}
                   </p>
                 )}
@@ -224,14 +224,14 @@ export const AboutView: React.FC = () => {
                 {cat.skills.map((skill, sIdx) => (
                   <div
                     key={sIdx}
-                    className="flex items-center justify-between p-2 rounded-lg bg-neutral-800/60 border border-neutral-700/40 text-xs"
+                    className="flex items-center justify-between p-2 rounded-lg bg-neutral-800/60 border border-neutral-700/40 text-xs font-light"
                   >
-                    <span className="font-semibold text-neutral-200">{skill.name}</span>
+                    <span className="text-neutral-200">{skill.name}</span>
                     {skill.level && (
                       <span
-                        className={`text-[11px] font-medium px-2 py-0.5 rounded ${
+                        className={`text-[11px] px-2 py-0.5 rounded font-light ${
                           skill.highlight
-                            ? 'bg-[#d85d3a]/20 text-[#d85d3a] font-semibold'
+                            ? 'bg-[#d85d3a]/20 text-[#d85d3a]'
                             : 'bg-neutral-700/60 text-neutral-400'
                         }`}
                       >
@@ -249,20 +249,20 @@ export const AboutView: React.FC = () => {
       {/* Direct Contact Form */}
       <div className="p-8 sm:p-10 rounded-3xl bg-neutral-900 border border-neutral-800 max-w-4xl mx-auto shadow-2xl space-y-6">
         <div className="text-center max-w-lg mx-auto space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-[#d85d3a]">
+          <span className="text-xs font-light uppercase tracking-widest text-[#d85d3a]">
             Direct Inquiries
           </span>
-          <h2 className="font-display text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight uppercase">
             Start a Conversation
           </h2>
-          <p className="text-xs sm:text-sm text-neutral-400">
+          <p className="text-xs sm:text-sm text-neutral-400 font-light">
             For commercial broadcast briefs, brand visual direction, or custom motion pipelines, drop a direct note.
           </p>
         </div>
 
         <form onSubmit={handleSendEmail} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold uppercase tracking-wider text-neutral-300">
+            <label className="text-xs font-light uppercase tracking-wider text-neutral-300">
               Subject / Project Type
             </label>
             <input
@@ -271,12 +271,12 @@ export const AboutView: React.FC = () => {
               value={contactSubject}
               onChange={(e) => setContactSubject(e.target.value)}
               placeholder="e.g. Broadcast Commercial / Motion Visual Direction / Full-time Role"
-              className="w-full px-4 py-3 rounded-xl bg-neutral-800/80 border border-neutral-700 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#d85d3a] transition-colors"
+              className="w-full px-4 py-3 rounded-xl bg-neutral-800/80 border border-neutral-700 text-sm font-light text-white placeholder-neutral-500 focus:outline-none focus:border-[#d85d3a] transition-colors"
             />
           </div>
 
           <div className="space-y-1.5">
-            <label className="text-xs font-semibold uppercase tracking-wider text-neutral-300">
+            <label className="text-xs font-light uppercase tracking-wider text-neutral-300">
               Message
             </label>
             <textarea
@@ -285,18 +285,18 @@ export const AboutView: React.FC = () => {
               value={contactMessage}
               onChange={(e) => setContactMessage(e.target.value)}
               placeholder="Tell me about your project scope, timeline, or vision..."
-              className="w-full px-4 py-3 rounded-xl bg-neutral-800/80 border border-neutral-700 text-sm text-white placeholder-neutral-500 focus:outline-none focus:border-[#d85d3a] transition-colors resize-none"
+              className="w-full px-4 py-3 rounded-xl bg-neutral-800/80 border border-neutral-700 text-sm font-light text-white placeholder-neutral-500 focus:outline-none focus:border-[#d85d3a] transition-colors resize-none"
             />
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-            <p className="text-xs text-neutral-400">
-              Sends directly to <span className="text-[#d85d3a] font-medium">{PERSONAL_INFO.email}</span>
+            <p className="text-xs text-neutral-400 font-light">
+              Sends directly to <span className="text-[#d85d3a] font-normal">{PERSONAL_INFO.email}</span>
             </p>
             <button
               id="submit-contact-email-btn"
               type="submit"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs font-bold text-white bg-[#d85d3a] hover:bg-[#c24e2d] transition-colors shadow-lg shadow-[#d85d3a]/25"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-xs font-light text-white bg-[#d85d3a] hover:bg-[#c24e2d] transition-colors shadow-lg shadow-[#d85d3a]/25 uppercase tracking-wider"
             >
               <Send className="w-4 h-4" />
               <span>Send Message</span>
