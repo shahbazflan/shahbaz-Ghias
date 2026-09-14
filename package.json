@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@google/genai": "^0.1.1",
+    "@google/genai": "*",
     "@types/three": "^0.174.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.4.10",
