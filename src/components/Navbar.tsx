@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Menu, X, ArrowUpRight } from 'lucide-react';
+import { Menu, X, ArrowUpRight, Volume2, VolumeX } from 'lucide-react';
 import { PageTab } from '../types';
 import { PERSONAL_INFO } from '../data/portfolioData';
 import { ScrambleText } from './ScrambleText';
+import { ambientAudio } from '../utils/ambientAudio';
 
 interface NavbarProps {
   currentTab: PageTab;
@@ -155,6 +156,17 @@ const MagneticActionLink: React.FC<{
 export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dubaiClock, setDubaiClock] = useState('');
+  const [isSoundPlaying, setIsSoundPlaying] = useState(false);
+
+  useEffect(() => {
+    return ambientAudio.subscribe((playing) => {
+      setIsSoundPlaying(playing);
+    });
+  }, []);
+
+  const handleToggleSound = () => {
+    ambientAudio.toggle();
+  };
 
   useEffect(() => {
     const tick = () => {
@@ -188,19 +200,19 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
           }}
           className="flex items-center gap-3 group text-left focus:outline-none shrink-0"
         >
-          <div className="w-9 h-9 rounded-lg bg-neutral-900 border border-neutral-700/80 group-hover:border-[#d85d3a] flex items-center justify-center text-white text-xs font-light tracking-widest transition-colors duration-300">
+          <div className="w-9 h-9 rounded-lg bg-neutral-900 border border-neutral-700/80 group-hover:border-[#f59e0b] group-hover:text-[#f59e0b] flex items-center justify-center text-white text-xs font-light tracking-widest transition-colors duration-300">
             SA
           </div>
           <div>
             <div className="flex items-center gap-2">
               <ScrambleText
                 text={PERSONAL_INFO.name}
-                className="font-name-zalando font-extrabold text-sm sm:text-base tracking-tight text-white uppercase"
+                className="font-name-zalando font-extrabold text-sm sm:text-base tracking-tight text-white group-hover:text-[#f59e0b] transition-colors duration-300 uppercase"
               />
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0" title="Available for projects" />
             </div>
             <p className="text-[10px] text-neutral-400 tracking-wider uppercase font-light">
-              Motion Director • Dubai ({dubaiClock} GST)
+              Motion Designer • Dubai ({dubaiClock} GST)
             </p>
           </div>
         </button>
@@ -260,18 +272,70 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
               </span>
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </MagneticActionLink>
+
+            {/* Persistent Minimal Studio Sound Toggle Button */}
+            <button
+              id="nav-sound-toggle"
+              onClick={handleToggleSound}
+              className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-mono transition-all duration-300 select-none ${
+                isSoundPlaying
+                  ? 'bg-[#d85d3a]/15 border-[#d85d3a]/60 text-white shadow-[0_0_14px_rgba(216,93,58,0.25)]'
+                  : 'bg-[#121417]/90 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700'
+              }`}
+              title={isSoundPlaying ? 'Mute studio ambient loop' : 'Play studio ambient soundscape'}
+            >
+              {isSoundPlaying ? (
+                <>
+                  <Volume2 className="w-3.5 h-3.5 text-[#d85d3a]" />
+                  <span className="text-[11px] font-medium tracking-wider text-neutral-200">
+                    SOUND
+                  </span>
+                  <div className="flex items-center gap-0.5 h-2.5">
+                    <span className="w-0.5 h-2.5 bg-[#d85d3a] rounded-full animate-pulse" />
+                    <span className="w-0.5 h-1.5 bg-[#d85d3a] rounded-full animate-pulse" style={{ animationDelay: '150ms' }} />
+                    <span className="w-0.5 h-2 bg-[#d85d3a] rounded-full animate-pulse" style={{ animationDelay: '300ms' }} />
+                  </div>
+                </>
+              ) : (
+                <>
+                  <VolumeX className="w-3.5 h-3.5 text-neutral-500" />
+                  <span className="text-[11px] font-light tracking-wider text-neutral-400">
+                    SOUND
+                  </span>
+                  <span className="text-[9px] px-1 py-0.5 rounded bg-neutral-800/80 text-neutral-400 font-mono">
+                    OFF
+                  </span>
+                </>
+              )}
+            </button>
           </div>
         </div>
 
-        {/* Mobile menu trigger */}
-        <button
-          type="button"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="lg:hidden p-2 rounded-lg bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800"
-          aria-label="Toggle Navigation Menu"
-        >
-          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-        </button>
+        {/* Mobile controls: Sound toggle + menu trigger */}
+        <div className="lg:hidden flex items-center gap-2">
+          <button
+            id="mobile-sound-toggle"
+            onClick={handleToggleSound}
+            className={`p-2 rounded-lg border text-xs transition-all duration-300 ${
+              isSoundPlaying
+                ? 'bg-[#d85d3a]/20 border-[#d85d3a]/60 text-[#d85d3a]'
+                : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-white'
+            }`}
+            title={isSoundPlaying ? 'Mute studio ambient sound' : 'Play studio ambient sound'}
+            aria-label="Toggle ambient studio sound"
+          >
+            {isSoundPlaying ? <Volume2 className="w-4 h-4 text-[#d85d3a]" /> : <VolumeX className="w-4 h-4" />}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 rounded-lg bg-neutral-900 text-neutral-300 hover:text-white border border-neutral-800"
+            aria-label="Toggle Navigation Menu"
+          >
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Drawer Menu */}
@@ -315,7 +379,22 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
               ))}
             </nav>
 
-            <div className="pt-3 border-t border-neutral-800 flex items-center gap-2">
+            <div className="pt-3 border-t border-neutral-800 flex items-center justify-between">
+              <span className="text-xs font-mono text-neutral-400">STUDIO AMBIENCE:</span>
+              <button
+                onClick={handleToggleSound}
+                className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl border text-xs font-mono transition-all duration-300 ${
+                  isSoundPlaying
+                    ? 'bg-[#d85d3a]/20 border-[#d85d3a]/60 text-white'
+                    : 'bg-neutral-900 border-neutral-800 text-neutral-400'
+                }`}
+              >
+                {isSoundPlaying ? <Volume2 className="w-3.5 h-3.5 text-[#d85d3a]" /> : <VolumeX className="w-3.5 h-3.5" />}
+                <span>{isSoundPlaying ? 'AUDIO ACTIVE' : 'AUDIO MUTED'}</span>
+              </button>
+            </div>
+
+            <div className="pt-2 border-t border-neutral-800 flex items-center gap-2">
               <a
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"

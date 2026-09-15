@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { Play, Sparkles, Film, ArrowRight, Layers, CheckCircle2, Share2, Copy, Check, ArrowUpRight } from 'lucide-react';
 import { SHOWREEL_VIDEO, PERSONAL_INFO } from '../data/portfolioData';
 import { PageTab } from '../types';
+import { ShowreelGeometricShapes } from './ShowreelGeometricShapes';
 
 interface ShowreelViewProps {
   onTabChange: (tab: PageTab) => void;
@@ -23,14 +24,16 @@ export const ShowreelView: React.FC<ShowreelViewProps> = ({ onTabChange }) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-      className="py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 space-y-12"
+      className="relative py-12 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 space-y-12 overflow-hidden"
     >
+      <ShowreelGeometricShapes />
+
       {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-800/80">
+      <div className="relative z-10 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-800/80">
         <div className="max-w-3xl space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#d85d3a]/15 text-[#d85d3a] border border-[#d85d3a]/30 text-xs font-light uppercase tracking-wider">
             <Film className="w-3.5 h-3.5" />
-            <span>Director's Reel</span>
+            <span>Featured Showreel</span>
           </div>
           <h1 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight uppercase">
             Master Showreel
@@ -66,12 +69,12 @@ export const ShowreelView: React.FC<ShowreelViewProps> = ({ onTabChange }) => {
 
       {/* Metadata and Breakdown Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
-        {/* Direction & Focus */}
+        {/* Motion Focus */}
         <div className="p-7 rounded-2xl bg-neutral-900/60 border border-neutral-800 space-y-3">
           <div className="flex items-center gap-2 text-[#d85d3a]">
             <Layers className="w-4 h-4" />
             <h3 className="text-base font-normal uppercase tracking-wide text-white">
-              Creative Direction
+              Creative Motion Strategy
             </h3>
           </div>
           <p className="text-xs sm:text-sm text-neutral-300 leading-relaxed font-light">
@@ -123,7 +126,7 @@ export const ShowreelView: React.FC<ShowreelViewProps> = ({ onTabChange }) => {
               Have a Project in Mind?
             </h3>
             <p className="text-xs text-neutral-300 leading-relaxed font-light">
-              Open to commercial visual direction, motion design lead roles, and agency contracts worldwide.
+              Open to commercial motion design, creative lead roles, and agency contracts worldwide.
             </p>
           </div>
 

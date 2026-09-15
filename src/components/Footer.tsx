@@ -19,11 +19,11 @@ export const Footer: React.FC<FooterProps> = () => {
         <div className="pb-16 border-b border-neutral-800/70">
           {/* Brand Col */}
           <div className="max-w-lg space-y-4">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-700 flex items-center justify-center text-white text-xs font-light tracking-wider">
+            <div className="flex items-center gap-3 group cursor-pointer">
+              <div className="w-8 h-8 rounded-lg bg-neutral-900 border border-neutral-700 group-hover:border-[#f59e0b] group-hover:text-[#f59e0b] flex items-center justify-center text-white text-xs font-light tracking-wider transition-colors duration-300">
                 SA
               </div>
-              <span className="font-normal text-base sm:text-lg text-white uppercase tracking-tight">
+              <span className="font-normal text-base sm:text-lg text-white group-hover:text-[#f59e0b] uppercase tracking-tight transition-colors duration-300">
                 <ScrambleText text={PERSONAL_INFO.name} hoverOnly />
               </span>
             </div>
@@ -38,7 +38,7 @@ export const Footer: React.FC<FooterProps> = () => {
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500 font-light">
-          <p>© {new Date().getFullYear()} Shahbaz Ahmed. Visual Direction &amp; Motion Graphics.</p>
+          <p>© {new Date().getFullYear()} <span className="text-white hover:text-[#f59e0b] transition-colors duration-300 cursor-default">Shahbaz Ahmed</span>. Motion Graphics &amp; Visual Design.</p>
 
           <div className="flex items-center gap-6">
             <span className="inline-flex items-center gap-1.5 text-neutral-300 font-light">

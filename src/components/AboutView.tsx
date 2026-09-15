@@ -60,8 +60,8 @@ export const AboutView: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
 
               <div className="relative z-10 w-full p-4 text-center space-y-0.5">
-                <span className="font-normal text-base sm:text-lg text-white block">Shahbaz Ahmed</span>
-                <span className="text-xs text-neutral-300 font-light block">Senior Visual Director</span>
+                <span className="font-normal text-base sm:text-lg text-white hover:text-[#f59e0b] transition-colors duration-300 cursor-default block">Shahbaz Ahmed</span>
+                <span className="text-xs text-neutral-300 font-light block">Senior Motion Designer</span>
               </div>
 
               <div className="absolute top-3 right-3 py-1 px-2.5 rounded-full bg-black/70 backdrop-blur-md border border-neutral-700/60 flex items-center gap-1.5 text-[10px] font-light">
@@ -135,10 +135,10 @@ export const AboutView: React.FC = () => {
               <span>Executive Profile</span>
             </div>
             <h1 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-              Hi, I'm <span className="text-[#d85d3a] font-extrabold">Shahbaz Ahmed</span>
+              Hi, I'm <span className="text-[#d85d3a] hover:text-[#f59e0b] transition-colors duration-300 font-extrabold cursor-default">Shahbaz Ahmed</span>
             </h1>
             <p className="text-base sm:text-lg text-neutral-300 font-light">
-              Senior Motion Graphics Designer &amp; Visual Director
+              Senior Motion Graphics Designer
             </p>
           </div>
 
@@ -256,7 +256,7 @@ export const AboutView: React.FC = () => {
             Start a Conversation
           </h2>
           <p className="text-xs sm:text-sm text-neutral-400 font-light">
-            For commercial broadcast briefs, brand visual direction, or custom motion pipelines, drop a direct note.
+            For commercial broadcast briefs, brand motion design, or custom VFX pipelines, drop a direct note.
           </p>
         </div>
 
@@ -270,7 +270,7 @@ export const AboutView: React.FC = () => {
               required
               value={contactSubject}
               onChange={(e) => setContactSubject(e.target.value)}
-              placeholder="e.g. Broadcast Commercial / Motion Visual Direction / Full-time Role"
+              placeholder="e.g. Broadcast Commercial / Motion Design / Full-time Role"
               className="w-full px-4 py-3 rounded-xl bg-neutral-800/80 border border-neutral-700 text-sm font-light text-white placeholder-neutral-500 focus:outline-none focus:border-[#d85d3a] transition-colors"
             />
           </div>

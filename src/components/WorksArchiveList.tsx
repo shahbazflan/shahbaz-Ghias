@@ -122,7 +122,7 @@ export const WorksArchiveList: React.FC<WorksArchiveListProps> = ({
               {/* Role / Focus */}
               <div className="hidden sm:flex col-span-3 lg:col-span-3 flex-col justify-center">
                 <span className="text-xs text-neutral-300 group-hover:text-white transition-colors font-light">
-                  {video.role || 'Visual Director & Animator'}
+                  {video.role || 'Senior Motion Designer & Animator'}
                 </span>
                 <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-light">
                   {video.category}

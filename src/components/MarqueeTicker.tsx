@@ -25,7 +25,7 @@ export const MarqueeTicker: React.FC = () => {
 
   const items = [
     { label: 'MOTION GRAPHICS', icon: <Sparkles className="w-3 h-3 text-[#d85d3a]" /> },
-    { label: 'AI CONCEPT DIRECTION', icon: <Star className="w-3 h-3 text-[#d85d3a]" /> },
+    { label: 'AI CONCEPT DESIGN', icon: <Star className="w-3 h-3 text-[#d85d3a]" /> },
     { label: 'VISUAL DYNAMICS & MOTION', icon: <Compass className="w-3 h-3 text-[#d85d3a]" /> },
     { label: 'BROADCAST COMMERCIALS', icon: <Film className="w-3 h-3 text-[#d85d3a]" /> },
     { label: 'KINETIC TYPOGRAPHY', icon: <Sparkles className="w-3 h-3 text-[#d85d3a]" /> },

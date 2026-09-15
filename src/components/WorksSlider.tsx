@@ -378,7 +378,7 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
                   Role
                 </p>
                 <p className="text-neutral-200 font-light normal-case">
-                  {activeVideo.role || 'Senior Visual Director & Lead Motion'}
+                  {activeVideo.role || 'Senior Motion Designer & Lead Animator'}
                 </p>
               </div>
 

@@ -50,10 +50,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
 
   return (
     <section className="relative overflow-hidden pt-12 pb-20 md:pt-20 md:pb-28 border-b border-neutral-800/60">
-      {/* Subtle warm ambient lighting */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[320px] bg-[#d85d3a]/10 blur-[130px] rounded-full pointer-events-none -z-10" />
-
-      {/* Disciplined, Figma-clean centered container (never stretched too wide) */}
+      {/* Figma-clean centered container (never stretched too wide) */}
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           id="hero-content-exclusion"
@@ -77,7 +74,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
               <span className="hidden sm:inline-block text-neutral-600">•</span>
               <span className="inline-flex items-center gap-1.5 text-neutral-300 font-light">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                <span>Available for Directing</span>
+                <span>Available for Projects</span>
               </span>
             </div>
           </motion.div>
@@ -102,7 +99,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
               variants={itemVariants}
               className="text-sm sm:text-base text-neutral-400 font-light leading-relaxed max-w-2xl pt-1"
             >
-              Transforming complex brand ideas into magnetic screen experiences. Merging fifteen years of UAE broadcast commercial direction with high-precision motion design and next-generation synthetic cinematography.
+              Transforming complex brand ideas into magnetic screen experiences. Merging fifteen years of UAE broadcast commercial production with high-precision motion design and next-generation synthetic cinematography.
             </motion.p>
           </div>
 
@@ -169,10 +166,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onTabChange, onPlaySho
             <button
               id="hero-explore-works-btn"
               onClick={scrollToWorks}
-              className="inline-flex items-center gap-2 px-5 sm:px-6 py-3 rounded-full text-xs uppercase tracking-wider text-neutral-200 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700/80 hover:border-neutral-600 transition-all duration-200 hover:-translate-y-0.5 font-light"
+              className="group inline-flex items-center gap-2 px-5 sm:px-6 py-3 rounded-full text-xs uppercase tracking-wider text-neutral-200 hover:text-[#f59e0b] bg-neutral-900 hover:bg-neutral-800 border border-neutral-700/80 hover:border-[#f59e0b]/50 transition-all duration-300 hover:-translate-y-0.5 font-light"
             >
-              <span>Explore Selected Works</span>
-              <ArrowDown className="w-3.5 h-3.5 text-[#d85d3a]" />
+              <span className="group-hover:text-[#f59e0b] transition-colors duration-300">Explore Selected Works</span>
+              <ArrowDown className="w-3.5 h-3.5 text-[#d85d3a] group-hover:text-[#f59e0b] transition-colors duration-300" />
             </button>
 
             <button

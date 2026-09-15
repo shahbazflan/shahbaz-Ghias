@@ -97,13 +97,22 @@ export const GlassMagnifierHeadline: React.FC<GlassMagnifierHeadlineProps> = ({
 
   const renderTextContent = (isMagnified = false) => (
     <div
-      className={`flex flex-col tracking-tight leading-[0.88] uppercase font-name-zalando text-5xl sm:text-7xl md:text-8xl lg:text-[6.75rem] font-extrabold select-none ${
-        isMagnified ? 'text-white' : 'text-white'
+      className={`flex flex-col tracking-tight leading-[0.88] uppercase font-name-zalando text-5xl sm:text-7xl md:text-8xl lg:text-[6.75rem] font-extrabold select-none transition-colors duration-300 ${
+        isHovered
+          ? 'text-[#f59e0b]'
+          : 'text-white'
       }`}
       style={{
         fontFamily: "'Zalando Sans Expanded', 'Zalando Sans', system-ui, -apple-system, sans-serif",
         fontWeight: 800,
         fontStretch: 'expanded',
+        color: isHovered ? '#f59e0b' : '#ffffff',
+        textShadow: isHovered
+          ? isMagnified
+            ? '0 0 32px rgba(245, 158, 11, 0.75), 0 0 60px rgba(245, 158, 11, 0.35)'
+            : '0 0 28px rgba(245, 158, 11, 0.5)'
+          : 'none',
+        transition: 'color 0.3s ease, text-shadow 0.3s ease',
       }}
     >
       <span className="inline-block transition-transform duration-75">
