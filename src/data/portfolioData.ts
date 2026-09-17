@@ -6,7 +6,11 @@ export const PERSONAL_INFO = {
   handle: 'shahbazflan',
   title: 'Senior Motion Graphics Designer',
   experience: '15+ Years UAE Market Experience',
-  email: 'shahbazflan@gmail.com',
+  email: 'contact@shahbazflan.com',
+  hiddenBackupEmail: 'shahbazflan@gmail.com',
+  whatsapp: '+971 55 238 8157',
+  whatsappClean: '971552388157',
+  whatsappDisplay: '+971 55 238 8157 (UAE)',
   linkedin: 'https://www.linkedin.com/in/shabaz-ghias-21907b37',
   canvaPortfolio: 'https://shahbazflan.my.canva.site/shahbaz',
   bioShort: 'Specializing in broadcast commercials, kinetic motion graphics, high-retention video advertising, and next-generation generative AI workflows.',
@@ -281,8 +285,24 @@ export const AI_IDEATION_VIDEOS: VideoItem[] = [
     description: 'Ceremonial fabric aerodynamics and golden hour volumetric atmospheric lighting.',
     thumbnail:
       'https://embed-ssl.wistia.com/deliveries/2aae0fcb1920389e976cd553c3f8103e.jpg?image_crop_resized=960x540',
+    videoUrl: 'https://fast.wistia.net/embed/iframe/qqtnl23kia',
     aspect: '16:9',
     tools: ['After Effects', 'AI Workflows'],
+  },
+  {
+    id: 'hrda6ver65',
+    title: 'Fashion Eyewear — Couple Editorial',
+    category: 'Fashion & Editorial',
+    role: 'AI Motion & Cinematography Specialist',
+    context: 'Editorial Eyewear Commercial Spec',
+    recognitions: 'Cinematic Framing & Stylized Reflections',
+    year: '2024',
+    description: 'High-fashion eyewear editorial showcasing cinematic couple framing, stylized lens reflections, and nuanced motion choreography.',
+    thumbnail:
+      'https://embed-ssl.wistia.com/deliveries/8f005aa63c7c94f333ddfec93a5afae7f078b41d.jpg?image_crop_resized=960x540',
+    videoUrl: 'https://fast.wistia.net/embed/iframe/hrda6ver65?seo=true&videoFoam=true',
+    aspect: '9:16',
+    tools: ['Midjourney', 'Kling AI', 'After Effects'],
   },
 ];
 

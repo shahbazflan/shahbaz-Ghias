@@ -1,6 +1,6 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { X, Sparkles, Film, ExternalLink, ChevronDown } from 'lucide-react';
+import { X, Sparkles, Film, ExternalLink, ChevronDown, Video, Link2, Check, Copy, RefreshCw } from 'lucide-react';
 import { VideoItem } from '../types';
 
 interface VideoModalProps {
@@ -8,9 +8,123 @@ interface VideoModalProps {
   onClose: () => void;
 }
 
+type ParsedVideoSource =
+  | { type: 'youtube'; embedUrl: string; directUrl: string }
+  | { type: 'vimeo'; embedUrl: string; directUrl: string }
+  | { type: 'html5'; url: string; directUrl: string }
+  | { type: 'wistia'; id: string; embedUrl: string; directUrl: string }
+  | { type: 'iframe'; embedUrl: string; directUrl: string };
+
+function parseVideoSource(raw?: string, fallbackId?: string): ParsedVideoSource {
+  const target = (raw || fallbackId || '').trim();
+
+  // YouTube detection
+  const ytMatch = target.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i);
+  if (ytMatch) {
+    return {
+      type: 'youtube',
+      embedUrl: `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&rel=0&modestbranding=1`,
+      directUrl: `https://youtu.be/${ytMatch[1]}`,
+    };
+  }
+
+  // Vimeo detection
+  const vimeoMatch = target.match(/(?:vimeo\.com\/|player\.vimeo\.com\/video\/)(\d+)/i);
+  if (vimeoMatch) {
+    return {
+      type: 'vimeo',
+      embedUrl: `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1&title=0&byline=0`,
+      directUrl: `https://vimeo.com/${vimeoMatch[1]}`,
+    };
+  }
+
+  // Direct HTML5 Video (.mp4, .webm, .ogg, .mov, data, or Wistia bin deliveries)
+  if (
+    /\.(mp4|webm|ogg|mov)(\?.*)?$/i.test(target) ||
+    target.includes('.bin') ||
+    target.startsWith('blob:') ||
+    target.startsWith('data:video/')
+  ) {
+    return {
+      type: 'html5',
+      url: target,
+      directUrl: target,
+    };
+  }
+
+  // Wistia Share URL (/s/<id>)
+  const wistiaShareMatch = target.match(/wistia\.com\/s\/([a-zA-Z0-9]+)/i);
+  if (wistiaShareMatch) {
+    const shareKey = wistiaShareMatch[1];
+    // Known share key mappings
+    const resolvedId = shareKey === 'tjufffl5ujbbfjj' ? 'hrda6ver65' : shareKey;
+    return {
+      type: 'wistia',
+      id: resolvedId,
+      embedUrl: `https://fast.wistia.net/embed/iframe/${resolvedId}?autoplay=1&autoPlay=true&web_component=true&seo=true&videoFoam=true`,
+      directUrl: `https://shahbazflan.wistia.com/s/${shareKey}`,
+    };
+  }
+
+  // Wistia URL
+  const wistiaMatch = target.match(/(?:wistia\.(?:com|net)\/(?:embed\/iframe|medias)\/)([a-zA-Z0-9]+)/i);
+  if (wistiaMatch) {
+    let wistiaId = wistiaMatch[1];
+    if (wistiaId === 'tjufffl5ujbbfjj') {
+      wistiaId = 'hrda6ver65';
+    }
+    let embedUrl = target.includes('fast.wistia.net/embed/iframe/')
+      ? (target.includes('tjufffl5ujbbfjj') ? target.replace('tjufffl5ujbbfjj', 'hrda6ver65') : target)
+      : `https://fast.wistia.net/embed/iframe/${wistiaId}?web_component=true&seo=true&videoFoam=true`;
+    if (!embedUrl.includes('autoplay=1') && !embedUrl.includes('autoPlay=')) {
+      embedUrl += (embedUrl.includes('?') ? '&' : '?') + 'autoplay=1&autoPlay=true';
+    }
+    return {
+      type: 'wistia',
+      id: wistiaId,
+      embedUrl,
+      directUrl: target.startsWith('http') ? target : `https://fast.wistia.net/embed/iframe/${wistiaId}`,
+    };
+  }
+
+  // Generic full URL iframe
+  if (target.startsWith('http://') || target.startsWith('https://')) {
+    return {
+      type: 'iframe',
+      embedUrl: target,
+      directUrl: target,
+    };
+  }
+
+  // Default to Wistia hashed ID
+  const cleanId = target || '1ia8jflogs';
+  return {
+    type: 'wistia',
+    id: cleanId,
+    embedUrl: `https://fast.wistia.net/embed/iframe/${cleanId}?autoplay=1&autoPlay=true&web_component=true&seo=true`,
+    directUrl: `https://fast.wistia.net/embed/iframe/${cleanId}`,
+  };
+}
+
 export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
   const touchStartY = useRef<number | null>(null);
   const touchStartTime = useRef<number>(0);
+
+  const [customVideoUrl, setCustomVideoUrl] = useState('');
+  const [activeUrl, setActiveUrl] = useState<string>('');
+  const [isEditingUrl, setIsEditingUrl] = useState(false);
+  const [copiedCode, setCopiedCode] = useState(false);
+
+  // Sync state whenever active video changes
+  useEffect(() => {
+    if (video) {
+      const initial = video.videoUrl || video.id || '';
+      setActiveUrl(initial);
+      setCustomVideoUrl('');
+      setIsEditingUrl(false);
+      setCopiedCode(false);
+    }
+  }, [video]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -48,6 +162,24 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
     touchStartY.current = null;
   };
 
+  const currentSource = useMemo(() => {
+    return parseVideoSource(activeUrl, video?.id);
+  }, [activeUrl, video?.id]);
+
+  const handleApplyCustomUrl = (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
+    if (customVideoUrl.trim()) {
+      setActiveUrl(customVideoUrl.trim());
+    }
+  };
+
+  const handleCopyConfig = () => {
+    const snippet = `videoUrl: '${activeUrl}',`;
+    navigator.clipboard.writeText(snippet);
+    setCopiedCode(true);
+    setTimeout(() => setCopiedCode(false), 2200);
+  };
+
   return (
     <AnimatePresence>
       {video && (
@@ -71,15 +203,13 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
             dragElastic={{ top: 0.1, bottom: 0.85 }}
             dragSnapToOrigin
             onDragEnd={(_, info) => {
-              // Dismiss on downward drag (> 75px or downward velocity > 320px/s)
-              // or upward drag if intentionally swiped away
               if (info.offset.y > 75 || info.velocity.y > 320 || info.offset.y < -120 || info.velocity.y < -400) {
                 onClose();
               }
             }}
             onClick={(e) => e.stopPropagation()}
             className={`relative z-10 w-full bg-[#111317] border border-neutral-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col ${
-              video.aspect === '9:16' ? 'max-w-md max-h-[92vh]' : 'max-w-4xl'
+              video.aspect === '9:16' ? 'max-w-md max-h-[94vh]' : 'max-w-4xl'
             }`}
           >
             {/* Mobile Top Grab Pill Bar for Swipe-to-Dismiss */}
@@ -110,29 +240,118 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
                   {video.title}
                 </h3>
               </div>
-              <button
-                id="video-modal-close-btn"
-                onClick={onClose}
-                className="p-1.5 rounded-lg bg-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-700 transition-colors focus:outline-none shrink-0"
-                aria-label="Close video modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setIsEditingUrl(!isEditingUrl)}
+                  className={`px-2.5 py-1 rounded text-[11px] font-light flex items-center gap-1.5 transition-colors ${
+                    isEditingUrl
+                      ? 'bg-[#d85d3a] text-white'
+                      : 'bg-neutral-800 text-neutral-300 hover:text-white hover:bg-neutral-700'
+                  }`}
+                  title="Replace or test another video link (YouTube, Vimeo, MP4, Wistia)"
+                >
+                  <Link2 className="w-3 h-3" />
+                  <span className="hidden sm:inline">Add/Test Video</span>
+                </button>
+                <button
+                  id="video-modal-close-btn"
+                  onClick={onClose}
+                  className="p-1.5 rounded-lg bg-neutral-800 text-neutral-400 hover:text-white hover:bg-neutral-700 transition-colors focus:outline-none shrink-0"
+                  aria-label="Close video modal"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
             </div>
+
+            {/* Expandable Video Link Tester Drawer */}
+            <AnimatePresence>
+              {isEditingUrl && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="bg-[#181b22] border-b border-neutral-800 px-5 py-3.5 space-y-2.5"
+                >
+                  <div className="flex items-center justify-between text-xs text-neutral-300">
+                    <span className="font-medium flex items-center gap-1.5 text-white">
+                      <Video className="w-3.5 h-3.5 text-[#d85d3a]" />
+                      Custom Video Source Link / Embed
+                    </span>
+                    <span className="text-[10px] uppercase tracking-wider text-neutral-400 bg-neutral-800 px-2 py-0.5 rounded">
+                      Supports: YouTube • Vimeo • MP4 • Wistia
+                    </span>
+                  </div>
+
+                  <form onSubmit={handleApplyCustomUrl} className="flex flex-col sm:flex-row gap-2">
+                    <input
+                      type="text"
+                      placeholder="Paste YouTube, Vimeo, direct .mp4 URL, or Wistia ID..."
+                      value={customVideoUrl}
+                      onChange={(e) => setCustomVideoUrl(e.target.value)}
+                      className="flex-1 px-3.5 py-1.5 bg-neutral-900 border border-neutral-700 rounded-lg text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-[#d85d3a]"
+                    />
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="submit"
+                        disabled={!customVideoUrl.trim()}
+                        className="px-3 py-1.5 bg-[#d85d3a] hover:bg-[#c24e2d] disabled:opacity-50 text-white text-xs rounded-lg transition-colors font-medium shrink-0"
+                      >
+                        Play Video
+                      </button>
+                      <button
+                        type="button"
+                        onClick={handleCopyConfig}
+                        className="px-3 py-1.5 bg-neutral-800 hover:bg-neutral-700 text-neutral-200 text-xs rounded-lg transition-colors flex items-center gap-1 shrink-0"
+                        title="Copy configuration snippet for portfolioData.ts"
+                      >
+                        {copiedCode ? (
+                          <>
+                            <Check className="w-3.5 h-3.5 text-emerald-400" />
+                            <span className="text-emerald-400">Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5" />
+                            <span>Copy Code</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  </form>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {/* Video Player Frame */}
             <div
-              className={`w-full bg-black relative ${
+              className={`w-full bg-black relative flex items-center justify-center ${
                 video.aspect === '9:16' ? 'aspect-[9/16] max-h-[68vh]' : 'aspect-video'
               }`}
             >
-              <iframe
-                src={`https://fast.wistia.net/embed/iframe/${video.id}?autoplay=1&autoPlay=true&web_component=true&seo=true`}
-                title={video.title}
-                allow="autoplay; fullscreen"
-                allowFullScreen
-                className="w-full h-full border-0 absolute inset-0"
-              />
+              {currentSource.type === 'html5' ? (
+                <video
+                  key={currentSource.url}
+                  src={currentSource.url}
+                  poster={video.thumbnail}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="w-full h-full object-contain"
+                >
+                  Your browser does not support HTML5 video playback.
+                </video>
+              ) : (
+                <iframe
+                  key={currentSource.embedUrl}
+                  src={currentSource.embedUrl}
+                  title={video.title}
+                  allow="autoplay; fullscreen; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full border-0 absolute inset-0"
+                />
+              )}
             </div>
 
             {/* Footer details */}
@@ -158,15 +377,20 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
                   </div>
                 )}
 
-                <a
-                  href={`https://fast.wistia.net/embed/iframe/${video.id}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1 text-[11px] font-light text-neutral-400 hover:text-[#d85d3a] transition-colors ml-auto"
-                >
-                  <ExternalLink className="w-3 h-3" />
-                  <span>Direct Player</span>
-                </a>
+                <div className="flex items-center gap-3 ml-auto">
+                  <span className="text-[10px] text-neutral-500 uppercase tracking-wider font-light">
+                    Format: <span className="text-[#d85d3a]">{currentSource.type.toUpperCase()}</span>
+                  </span>
+                  <a
+                    href={currentSource.directUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center gap-1 text-[11px] font-light text-neutral-400 hover:text-[#d85d3a] transition-colors"
+                  >
+                    <ExternalLink className="w-3 h-3" />
+                    <span>Direct Player</span>
+                  </a>
+                </div>
               </div>
             </div>
           </motion.div>
@@ -175,3 +399,4 @@ export const VideoModal: React.FC<VideoModalProps> = ({ video, onClose }) => {
     </AnimatePresence>
   );
 };
+

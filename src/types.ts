@@ -13,6 +13,7 @@ export interface VideoItem {
   thumbnail: string;
   aspect: '16:9' | '9:16';
   tools?: string[];
+  videoUrl?: string;
 }
 
 export interface FeaturedGateway {

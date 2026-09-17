@@ -13,18 +13,16 @@ import { VideoModal } from './components/VideoModal';
 import { InteractiveCanvas } from './components/InteractiveCanvas';
 import { MarqueeTicker } from './components/MarqueeTicker';
 import { ShowreelGeometricShapes } from './components/ShowreelGeometricShapes';
-import { KeyboardNavHUD } from './components/KeyboardNavHUD';
 import { PageTab, VideoItem } from './types';
 import { SHOWREEL_VIDEO, PERSONAL_INFO } from './data/portfolioData';
-import { Play, ArrowRight, List, Sliders, ArrowUpRight, Copy, Check } from 'lucide-react';
+import { Play, ArrowRight, List, Sliders, ArrowUpRight, Copy, Check, MessageCircle } from 'lucide-react';
 import { KineticPillButton } from './components/KineticPillButton';
 
 const HOME_SECTIONS = [
-  { id: 'hero-section', label: '01 Intro & Bio' },
-  { id: 'selected-works', label: '02 Selected Works' },
-  { id: 'portfolio-pillars', label: '03 Core Disciplines' },
-  { id: 'featured-showreel', label: '04 Featured Showreel' },
-  { id: 'commission-contact', label: '05 Contact & Commissions' },
+  { id: 'hero-section', label: 'Intro & Bio' },
+  { id: 'selected-works', label: 'Selected Works' },
+  { id: 'portfolio-pillars', label: 'Core Disciplines' },
+  { id: 'commission-contact', label: 'Contact & Commissions' },
 ];
 
 const ALL_VIEWS: { id: PageTab; label: string }[] = [
@@ -53,7 +51,15 @@ export default function App() {
           const el = document.getElementById('selected-works');
           if (el) el.scrollIntoView({ behavior: 'smooth' });
         }, 150);
-      } else if (['home', 'ai-ideation', 'showreel', 'ucg-ads', 'about'].includes(hash)) {
+      } else if (hash === 'showreel') {
+        // Prevent accidental landing on showreel if page lands or refreshes
+        if (!sessionStorage.getItem('explicit_showreel_nav')) {
+          setCurrentTab('home');
+          window.history.replaceState(null, '', window.location.pathname);
+          return;
+        }
+        setCurrentTab('showreel');
+      } else if (['home', 'ai-ideation', 'ucg-ads', 'about'].includes(hash)) {
         setCurrentTab(hash);
       }
     };
@@ -63,6 +69,9 @@ export default function App() {
   }, []);
 
   const handleTabChange = useCallback((tab: PageTab) => {
+    if (tab === 'showreel') {
+      sessionStorage.setItem('explicit_showreel_nav', 'true');
+    }
     if (tab === 'works') {
       if (currentTab === 'home') {
         const worksElement = document.getElementById('selected-works');
@@ -277,55 +286,7 @@ export default function App() {
               {/* 4. Portfolio Pillars (Four Core Disciplines) */}
               <FeaturedCards onSelectTab={handleTabChange} />
 
-              {/* 5. Master Showreel Cinematic Theater Dock on Home */}
-              <section id="featured-showreel" className="relative py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 border-t border-neutral-800/80 overflow-hidden">
-                {/* Subtle, slow-floating geometric background shapes */}
-                <ShowreelGeometricShapes />
-
-                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-                  <div className="lg:col-span-4 space-y-4">
-                    <div className="font-mono text-[11px] tracking-[0.25em] text-[#d85d3a] uppercase font-semibold">
-                      Featured Showreel
-                    </div>
-                    <h2 className="font-syne text-3xl sm:text-4xl font-extrabold text-white tracking-tight uppercase leading-tight">
-                      Broadcast Motion &amp; Visual Momentum
-                    </h2>
-                    <p className="text-sm text-neutral-400 leading-relaxed">
-                      A high-retention showcase capturing 15+ years of broadcast commercials, kinetic typography, motion graphics, and agency brand films engineered for maximum screen impact.
-                    </p>
-                    <div className="pt-2 font-mono text-xs space-y-1.5 text-neutral-300">
-                      <div><span className="text-neutral-500">RUNTIME:</span> 01:48</div>
-                      <div><span className="text-neutral-500">FORMAT:</span> 4K Ultra HD • 60 FPS</div>
-                      <div><span className="text-neutral-500">PIPELINE:</span> After Effects • Premiere Pro • DaVinci • AI</div>
-                    </div>
-                    <div className="pt-3">
-                      <button
-                        onClick={() => handleTabChange('showreel')}
-                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full font-mono text-xs font-bold text-white bg-[#d85d3a] hover:bg-[#c24e2d] transition-colors shadow-lg shadow-[#d85d3a]/25"
-                      >
-                        <Play className="w-3.5 h-3.5 fill-current" />
-                        <span>EXPAND SHOWREEL PAGE</span>
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="lg:col-span-8">
-                    <div className="relative rounded-2xl overflow-hidden bg-black border border-neutral-800 shadow-2xl group">
-                      <div className="aspect-video w-full relative">
-                        <iframe
-                          src={`https://fast.wistia.net/embed/iframe/${SHOWREEL_VIDEO.id}?web_component=true&seo=true`}
-                          title={SHOWREEL_VIDEO.title}
-                          allow="autoplay; fullscreen"
-                          allowFullScreen
-                          className="w-full h-full border-0 absolute inset-0"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* 6. Monumental Contact & Commission Send-off */}
+              {/* 5. Monumental Contact & Commission Send-off */}
               <section id="commission-contact" className="py-24 md:py-32 border-t border-neutral-800/80 bg-gradient-to-b from-transparent to-neutral-950/60">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center space-y-8">
                   <div className="text-xs uppercase tracking-[0.2em] text-[#d85d3a] font-light">
@@ -357,9 +318,17 @@ export default function App() {
                     </KineticPillButton>
 
                     <KineticPillButton
+                      variant="whatsapp"
+                      href={`https://wa.me/${PERSONAL_INFO.whatsappClean}?text=${encodeURIComponent("Hi Shahbaz, I'd like to discuss a motion design project!")}`}
+                      icon={<MessageCircle className="w-4 h-4 text-emerald-400" />}
+                    >
+                      CHAT ON WHATSAPP
+                    </KineticPillButton>
+
+                    <KineticPillButton
                       variant="linkedin"
                       href={PERSONAL_INFO.linkedin}
-                      icon={<ArrowUpRight className="w-4 h-4 text-[#d85d3a]" />}
+                      icon={<ArrowUpRight className="w-4 h-4 text-[#38bdf8]" />}
                     >
                       LINKEDIN PROFILE
                     </KineticPillButton>
@@ -367,7 +336,7 @@ export default function App() {
                     <KineticPillButton
                       variant="canva"
                       href={PERSONAL_INFO.canvaPortfolio}
-                      icon={<ArrowUpRight className="w-4 h-4 text-[#d85d3a]" />}
+                      icon={<ArrowUpRight className="w-4 h-4 text-[#00c4cc]" />}
                     >
                       CANVA PORTFOLIO
                     </KineticPillButton>
@@ -401,13 +370,7 @@ export default function App() {
         </AnimatePresence>
       </main>
 
-      {/* Floating Keyboard Navigation HUD Guide */}
-      <KeyboardNavHUD
-        currentSectionLabel={currentSectionLabel}
-        activeKey={activeNavKey}
-        onNavigateSection={handleSectionNav}
-        onNavigateView={handleViewNav}
-      />
+// KeyboardNavHUD removed per user request
 
       {/* Video Lightbox Modal */}
       <VideoModal video={activeVideo} onClose={() => setActiveVideo(null)} />

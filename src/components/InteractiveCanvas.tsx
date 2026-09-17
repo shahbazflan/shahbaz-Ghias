@@ -1248,52 +1248,10 @@ export const InteractiveCanvas: React.FC<InteractiveCanvasProps> = ({
   }, [isEnabled, isSlowMode]);
 
   return (
-    <>
-      <canvas
-        ref={canvasRef}
-        aria-hidden="true"
-        className={`pointer-events-none fixed inset-0 z-0 h-full w-full opacity-100 transition-opacity duration-700 ${className}`}
-      />
-      {/* Interactive Vortex Control Dock */}
-      {!hideControlDock && (
-        <div className="fixed bottom-3 right-3 z-30 flex items-center gap-2">
-          {/* Re-scatter & Form button */}
-          <button
-            type="button"
-            onClick={triggerScatterAnimation}
-            className="flex items-center gap-1.5 px-3 py-1 text-[10px] font-light tracking-wider uppercase bg-neutral-900/85 hover:bg-neutral-800 text-[#ff8a18] hover:text-[#ffc043] border border-[#ff8a18]/40 hover:border-[#ff8a18]/80 rounded-full backdrop-blur shadow-lg transition-colors group cursor-pointer"
-            title="Re-scatter dots and watch them form into circular vortex"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-[#ff8a18] animate-ping" />
-            <span>SCATTER & FORM</span>
-          </button>
-
-          {/* Speed Toggle */}
-          <button
-            type="button"
-            onClick={() => setIsSlowMode(!isSlowMode)}
-            className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-light tracking-wider uppercase bg-neutral-900/85 hover:bg-neutral-800 text-neutral-400 hover:text-neutral-200 border border-neutral-800 rounded-full backdrop-blur shadow-lg transition-colors cursor-pointer"
-            title="Toggle vortex orbit speed"
-          >
-            <span>{isSlowMode ? 'SPEED: SLOW' : 'SPEED: DYNAMIC'}</span>
-          </button>
-
-          {/* FX Live Toggle */}
-          <button
-            type="button"
-            onClick={() => setIsEnabled(!isEnabled)}
-            className="flex items-center gap-1.5 px-3 py-1 text-[10px] font-light tracking-wider uppercase bg-neutral-900/85 hover:bg-neutral-800 text-neutral-300 hover:text-white border border-neutral-800/80 rounded-full backdrop-blur shadow-lg transition-colors group cursor-pointer"
-            title="Toggle cosmic accretion vortex FX"
-          >
-            <span
-              className={`w-1.5 h-1.5 rounded-full ${
-                isEnabled ? 'bg-amber-400 animate-pulse' : 'bg-neutral-500'
-              }`}
-            />
-            <span>VORTEX: {isEnabled ? 'LIVE' : 'PAUSED'}</span>
-          </button>
-        </div>
-      )}
-    </>
+    <canvas
+      ref={canvasRef}
+      aria-hidden="true"
+      className={`pointer-events-none fixed inset-0 z-0 h-full w-full opacity-100 transition-opacity duration-700 ${className}`}
+    />
   );
 };

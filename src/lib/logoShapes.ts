@@ -73,7 +73,7 @@ export function getOrbitingLogos(
     {
       id: 'facebook',
       name: 'Facebook',
-      tag: 'FB // 01',
+      tag: 'Meta Ads',
       tier: 'inner',
       x: 0,
       y: 0,
@@ -85,7 +85,7 @@ export function getOrbitingLogos(
     {
       id: 'youtube',
       name: 'YouTube',
-      tag: 'YT // 02',
+      tag: 'Video TVC',
       tier: 'inner',
       x: 0,
       y: 0,
@@ -97,7 +97,7 @@ export function getOrbitingLogos(
     {
       id: 'instagram',
       name: 'Instagram',
-      tag: 'IG // 03',
+      tag: 'Reels & Stories',
       tier: 'inner',
       x: 0,
       y: 0,
@@ -109,7 +109,7 @@ export function getOrbitingLogos(
     {
       id: 'tiktok',
       name: 'TikTok',
-      tag: 'TT // 04',
+      tag: 'Commercials',
       tier: 'inner',
       x: 0,
       y: 0,
@@ -123,7 +123,7 @@ export function getOrbitingLogos(
     {
       id: 'snapchat',
       name: 'Snapchat',
-      tag: 'SC // 05',
+      tag: 'UGC Motion',
       tier: 'outer',
       x: 0,
       y: 0,
@@ -135,7 +135,7 @@ export function getOrbitingLogos(
     {
       id: 'linkedin',
       name: 'LinkedIn',
-      tag: 'IN // 06',
+      tag: 'B2B Video',
       tier: 'outer',
       x: 0,
       y: 0,
@@ -147,7 +147,7 @@ export function getOrbitingLogos(
     {
       id: 'x',
       name: 'X',
-      tag: 'X // 07',
+      tag: 'Platform Feed',
       tier: 'outer',
       x: 0,
       y: 0,
@@ -159,7 +159,7 @@ export function getOrbitingLogos(
     {
       id: 'pinterest',
       name: 'Pinterest',
-      tag: 'PIN // 08',
+      tag: 'Vertical Motion',
       tier: 'outer',
       x: 0,
       y: 0,
@@ -888,17 +888,18 @@ export function drawLogoNegativeSpace(
     ctx.stroke();
   }
 
-  // Architectural micro-tag underneath each logo
-  const fontSize = Math.max(Math.round(8 * scale), 7);
-  ctx.font = `${fontSize}px "JetBrains Mono", ui-monospace, SFMono-Regular, monospace`;
+  // Clean floating text labels underneath each brand logo (enlarged & regular weight for enhanced readability)
+  const nameFontSize = Math.max(Math.round(11 * scale), 10);
+  ctx.font = `500 ${nameFontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.fillStyle = `rgba(${rgbString}, ${0.62 * alpha})`;
-  ctx.fillText(logo.name.toUpperCase(), 0, r + 13 * scale);
+  ctx.fillStyle = `rgba(${rgbString}, ${0.9 * alpha})`;
+  ctx.fillText(logo.name.toUpperCase(), 0, r + 15 * scale);
 
-  ctx.font = `${Math.max(fontSize - 1, 6)}px "JetBrains Mono", ui-monospace, SFMono-Regular, monospace`;
-  ctx.fillStyle = `rgba(160, 165, 175, ${0.45 * alpha})`;
-  ctx.fillText(logo.tag, 0, r + 22 * scale);
+  const tagFontSize = Math.max(Math.round(9.5 * scale), 8.5);
+  ctx.font = `400 ${tagFontSize}px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+  ctx.fillStyle = `rgba(180, 190, 205, ${0.75 * alpha})`;
+  ctx.fillText(logo.tag, 0, r + 26 * scale);
 
   ctx.restore();
 }

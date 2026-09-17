@@ -81,13 +81,6 @@ const MagneticNavLink: React.FC<MagneticNavLinkProps> = ({ item, isActive, onSel
         animate={{ x: offset.x, y: offset.y }}
         transition={{ type: 'spring', stiffness: 380, damping: 18, mass: 0.15 }}
       >
-        <span
-          className={`text-[10px] transition-colors ${
-            isActive ? 'text-white/90 font-normal' : 'text-neutral-500 group-hover:text-neutral-300 font-light'
-          }`}
-        >
-          {item.num}
-        </span>
         <span>
           <ScrambleText text={item.label} bgColor={isActive ? '#d85d3a' : '#0b0d10'} />
         </span>
@@ -153,7 +146,57 @@ const MagneticActionLink: React.FC<{
   );
 };
 
-export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
+const MagneticActionButton: React.FC<{
+  children: React.ReactNode;
+  onClick?: () => void;
+  className: string;
+  title?: string;
+  id?: string;
+}> = ({ children, onClick, className, title, id }) => {
+  const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const ref = useRef<HTMLButtonElement | null>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    const deltaX = e.clientX - centerX;
+    const deltaY = e.clientY - centerY;
+    const maxPull = 6.5;
+    setOffset({
+      x: Math.max(-maxPull, Math.min(maxPull, deltaX * 0.3)),
+      y: Math.max(-maxPull, Math.min(maxPull, deltaY * 0.3)),
+    });
+  };
+
+  const handleMouseLeave = () => {
+    setOffset({ x: 0, y: 0 });
+  };
+
+  return (
+    <button
+      ref={ref}
+      id={id}
+      type="button"
+      onClick={onClick}
+      title={title}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className={className}
+    >
+      <motion.div
+        className="flex items-center gap-1.5 pointer-events-none"
+        animate={{ x: offset.x, y: offset.y }}
+        transition={{ type: 'spring', stiffness: 380, damping: 18, mass: 0.15 }}
+      >
+        {children}
+      </motion.div>
+    </button>
+  );
+};
+
+export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange, onOpenContact }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dubaiClock, setDubaiClock] = useState('');
   const [isSoundPlaying, setIsSoundPlaying] = useState(false);
@@ -238,13 +281,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
               href={PERSONAL_INFO.linkedin}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121417]/90 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 text-xs font-light tracking-wider transition-all duration-200 whitespace-nowrap shadow-sm group"
-              title="LinkedIn Profile"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#0a66c2]/15 hover:bg-[#0a66c2] text-[#0a66c2] hover:text-white border border-[#0a66c2]/40 hover:border-[#0a66c2] text-xs font-medium tracking-wider transition-all duration-200 whitespace-nowrap shadow-sm hover:shadow-[0_0_14px_rgba(10,102,194,0.45)] group"
+              title="LinkedIn Profile (Brand Color)"
             >
               <span>
-                <ScrambleText text="LI" bgColor="#121417" />
+                <ScrambleText text="LI" bgColor="#0a66c2" />
               </span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#0a66c2] group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </MagneticActionLink>
 
             <MagneticActionLink
@@ -252,26 +295,26 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
               href={PERSONAL_INFO.canvaPortfolio}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#121417]/90 hover:bg-neutral-800 text-white border border-neutral-800 hover:border-neutral-700 text-xs font-light tracking-wider transition-all duration-200 whitespace-nowrap shadow-sm group"
-              title="Canva Portfolio"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-[#00c4cc]/15 via-[#5d3bf6]/15 to-[#7d2ae8]/15 hover:from-[#00c4cc] hover:via-[#5d3bf6] hover:to-[#7d2ae8] text-[#00c4cc] hover:text-white border border-[#00c4cc]/40 hover:border-[#7d2ae8] text-xs font-medium tracking-wider transition-all duration-200 whitespace-nowrap shadow-sm hover:shadow-[0_0_14px_rgba(0,196,204,0.45)] group"
+              title="Canva Portfolio (Brand Colors)"
             >
               <span>
-                <ScrambleText text="CANVA" bgColor="#121417" />
+                <ScrambleText text="CANVA" bgColor="#00c4cc" />
               </span>
-              <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400 group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              <ArrowUpRight className="w-3.5 h-3.5 text-[#00c4cc] group-hover:text-white group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </MagneticActionLink>
 
-            <MagneticActionLink
+            <MagneticActionButton
               id="nav-action-contact"
-              href={`mailto:${PERSONAL_INFO.email}`}
-              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-normal uppercase tracking-wider text-white bg-[#d85d3a] hover:bg-[#c24e2d] transition-all shadow-lg shadow-[#d85d3a]/30 whitespace-nowrap shrink-0 hover:scale-[1.02] active:scale-[0.98] group"
-              title="Direct Email Contact"
+              onClick={onOpenContact}
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-normal uppercase tracking-wider text-white bg-[#d85d3a] hover:bg-[#c24e2d] transition-all shadow-lg shadow-[#d85d3a]/30 whitespace-nowrap shrink-0 hover:scale-[1.02] active:scale-[0.98] group cursor-pointer"
+              title="Open Contact & Inquiry"
             >
               <span>
                 <ScrambleText text="CONTACT" bgColor="#d85d3a" />
               </span>
               <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-            </MagneticActionLink>
+            </MagneticActionButton>
 
             {/* Persistent Minimal Studio Sound Toggle Button */}
             <button
@@ -366,13 +409,6 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
                   }`}
                 >
                   <div className="flex items-center gap-2.5">
-                    <span
-                      className={`font-syne text-xs font-semibold ${
-                        currentTab === item.id ? 'text-white/80 font-bold' : 'text-neutral-500'
-                      }`}
-                    >
-                      {item.num}
-                    </span>
                     <span>{item.label}</span>
                   </div>
                 </button>
@@ -399,27 +435,31 @@ export const Navbar: React.FC<NavbarProps> = ({ currentTab, onTabChange }) => {
                 href={PERSONAL_INFO.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-neutral-900 text-white border border-neutral-800 font-syne text-xs font-bold"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-[#0a66c2]/20 hover:bg-[#0a66c2] text-[#0a66c2] hover:text-white border border-[#0a66c2]/50 font-syne text-xs font-bold transition-colors"
               >
                 <span>LI</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#0a66c2] group-hover:text-white" />
               </a>
               <a
                 href={PERSONAL_INFO.canvaPortfolio}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-neutral-900 text-white border border-neutral-800 font-syne text-xs font-bold"
+                className="flex-1 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl bg-gradient-to-r from-[#00c4cc]/20 via-[#5d3bf6]/20 to-[#7d2ae8]/20 hover:from-[#00c4cc] hover:to-[#7d2ae8] text-[#00c4cc] hover:text-white border border-[#00c4cc]/50 font-syne text-xs font-bold transition-colors"
               >
                 <span>CANVA</span>
-                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-400" />
+                <ArrowUpRight className="w-3.5 h-3.5 text-[#00c4cc] group-hover:text-white" />
               </a>
-              <a
-                href={`mailto:${PERSONAL_INFO.email}`}
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  onOpenContact();
+                }}
                 className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-full bg-[#d85d3a] text-white font-syne text-xs font-extrabold shadow-md shadow-[#d85d3a]/25"
               >
                 <span>CONTACT</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
+              </button>
             </div>
           </motion.div>
         )}

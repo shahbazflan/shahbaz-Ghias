@@ -3,12 +3,18 @@ import { motion, AnimatePresence } from 'motion/react';
 
 interface GlassMagnifierHeadlineProps {
   text?: string;
+  line1?: string;
+  line2?: string;
   className?: string;
+  sizeClassName?: string;
 }
 
 export const GlassMagnifierHeadline: React.FC<GlassMagnifierHeadlineProps> = ({
-  text = 'Shahbaz Ahmed',
+  text,
+  line1 = 'ENTER MY',
+  line2 = 'CREATIVE SPACE',
   className = '',
+  sizeClassName = 'text-3xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[5rem]',
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 850, height: 120 });
@@ -89,15 +95,18 @@ export const GlassMagnifierHeadline: React.FC<GlassMagnifierHeadlineProps> = ({
   const textRotateY = isHovered ? normX * 7 : 0;
   const textRotateX = isHovered ? -normY * 6 : 0;
 
-  // Break words into discrete spans with identical styling across both layers
-  // This ensures "SHAHBAZ" and "AHMED" are stacked vertically matching the typographic reference
-  const words = text.trim().split(/\s+/);
-  const word1 = words[0] || 'SHAHBAZ';
-  const word2 = words.slice(1).join(' ') || 'AHMED';
+  // Determine lines: use line1 & line2 if provided, or parse from text
+  let displayLine1 = line1;
+  let displayLine2 = line2;
+  if (text) {
+    const words = text.trim().split(/\s+/);
+    displayLine1 = words[0] || '';
+    displayLine2 = words.slice(1).join(' ') || '';
+  }
 
   const renderTextContent = (isMagnified = false) => (
     <div
-      className={`flex flex-col tracking-tight leading-[0.88] uppercase font-name-zalando text-5xl sm:text-7xl md:text-8xl lg:text-[6.75rem] font-extrabold select-none transition-colors duration-300 ${
+      className={`flex flex-col tracking-tight leading-[0.88] uppercase font-name-zalando ${sizeClassName} font-extrabold select-none transition-colors duration-300 ${
         isHovered
           ? 'text-[#f59e0b]'
           : 'text-white'
@@ -115,11 +124,11 @@ export const GlassMagnifierHeadline: React.FC<GlassMagnifierHeadlineProps> = ({
         transition: 'color 0.3s ease, text-shadow 0.3s ease',
       }}
     >
-      <span className="inline-block transition-transform duration-75">
-        {word1}
+      <span className="inline-block whitespace-nowrap transition-transform duration-75">
+        {displayLine1}
       </span>
-      <span className="inline-block transition-transform duration-75">
-        {word2}
+      <span className="inline-block whitespace-nowrap transition-transform duration-75">
+        {displayLine2}
       </span>
     </div>
   );

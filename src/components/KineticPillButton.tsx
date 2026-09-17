@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'motion/react';
 interface KineticPillButtonProps {
   children: React.ReactNode;
   icon?: React.ReactNode;
-  variant: 'email' | 'linkedin' | 'canva' | 'custom';
+  variant: 'email' | 'linkedin' | 'canva' | 'whatsapp' | 'custom';
   href?: string;
   onClick?: () => void;
   target?: string;
@@ -94,27 +94,39 @@ export const KineticPillButton: React.FC<KineticPillButtonProps> = ({
         };
       case 'linkedin':
         return {
+          defaultBg: 'bg-[#0a66c2]/15',
+          hoverBg: 'bg-gradient-to-r from-[#0a66c2] via-[#0077b5] to-[#005582]',
+          defaultText: 'text-[#38bdf8] font-normal',
+          hoverText: 'text-white font-medium',
+          defaultBorder: 'border-[#0a66c2]/50',
+          hoverBorder: 'border-[#38bdf8]',
+          defaultShadow: 'shadow-md shadow-[#0a66c2]/20',
+          hoverShadow: 'shadow-[0_14px_36px_rgba(10,102,194,0.6)]',
+          caustic: 'rgba(10, 102, 194, 0.6)',
+        };
+      case 'whatsapp':
+        return {
           defaultBg: 'bg-neutral-900/90',
-          hoverBg: 'bg-gradient-to-r from-[#0077b5] via-[#008dd5] to-[#025a87]',
+          hoverBg: 'bg-gradient-to-r from-[#25d366] via-[#128c7e] to-[#075e54]',
           defaultText: 'text-neutral-200 font-light',
           hoverText: 'text-white font-normal',
           defaultBorder: 'border-neutral-700/80',
-          hoverBorder: 'border-[#38bdf8]',
+          hoverBorder: 'border-[#25d366]',
           defaultShadow: 'shadow-md shadow-black/30',
-          hoverShadow: 'shadow-[0_14px_36px_rgba(0,119,181,0.55)]',
-          caustic: 'rgba(56, 189, 248, 0.5)',
+          hoverShadow: 'shadow-[0_14px_36px_rgba(37,211,102,0.5)]',
+          caustic: 'rgba(37, 211, 102, 0.55)',
         };
       case 'canva':
         return {
-          defaultBg: 'bg-neutral-900/90',
-          hoverBg: 'bg-gradient-to-r from-[#7d2ae8] via-[#a855f7] to-[#d85d3a]',
-          defaultText: 'text-neutral-200 font-light',
-          hoverText: 'text-white font-normal',
-          defaultBorder: 'border-neutral-700/80',
-          hoverBorder: 'border-[#c084fc]',
-          defaultShadow: 'shadow-md shadow-black/30',
-          hoverShadow: 'shadow-[0_14px_36px_rgba(168,85,247,0.55)]',
-          caustic: 'rgba(192, 132, 252, 0.55)',
+          defaultBg: 'bg-gradient-to-r from-[#00c4cc]/15 via-[#5d3bf6]/15 to-[#7d2ae8]/15',
+          hoverBg: 'bg-gradient-to-r from-[#00c4cc] via-[#5d3bf6] to-[#7d2ae8]',
+          defaultText: 'text-[#00c4cc] font-normal',
+          hoverText: 'text-white font-medium',
+          defaultBorder: 'border-[#00c4cc]/50',
+          hoverBorder: 'border-[#7d2ae8]',
+          defaultShadow: 'shadow-md shadow-[#00c4cc]/20',
+          hoverShadow: 'shadow-[0_14px_36px_rgba(0,196,204,0.6)]',
+          caustic: 'rgba(0, 196, 204, 0.6)',
         };
       default:
         return {

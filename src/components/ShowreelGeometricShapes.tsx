@@ -3,25 +3,34 @@ import { motion } from 'motion/react';
 
 export const ShowreelGeometricShapes: React.FC = () => {
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden select-none -z-0">
-      {/* Ambient Atmospheric Glow Orbs (warm terracotta & electric blue) */}
+    <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden select-none -z-0">
+      {/* Ambient Atmospheric Glow Orbs (warm terracotta & electric blue) that bleed across the full viewport */}
       <motion.div
         animate={{
-          x: [-20, 20, -20],
-          y: [-15, 15, -15],
-          scale: [1, 1.08, 1],
+          x: [-25, 25, -25],
+          y: [-20, 20, -20],
+          scale: [1, 1.1, 1],
         }}
         transition={{ duration: 16, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-[#d85d3a]/10 blur-3xl"
+        className="absolute -top-32 -left-20 sm:-left-32 w-[28rem] sm:w-[38rem] h-[28rem] sm:h-[38rem] rounded-full bg-[#d85d3a]/12 blur-3xl pointer-events-none"
       />
       <motion.div
         animate={{
-          x: [20, -20, 20],
-          y: [15, -15, 15],
-          scale: [1, 1.12, 1],
+          x: [25, -25, 25],
+          y: [20, -20, 20],
+          scale: [1, 1.15, 1],
         }}
         transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
-        className="absolute -bottom-24 -right-24 w-96 h-96 rounded-full bg-[#38bdf8]/10 blur-3xl"
+        className="absolute -bottom-32 -right-20 sm:-right-32 w-[28rem] sm:w-[38rem] h-[28rem] sm:h-[38rem] rounded-full bg-[#38bdf8]/12 blur-3xl pointer-events-none"
+      />
+      {/* Center ambient warm drift */}
+      <motion.div
+        animate={{
+          opacity: [0.04, 0.08, 0.04],
+          scale: [0.95, 1.05, 0.95],
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[45rem] h-96 rounded-full bg-[#d85d3a]/8 blur-3xl pointer-events-none"
       />
 
       {/* Rotating Concentric Motion Rings (Top Right) */}
@@ -119,6 +128,12 @@ export const ShowreelGeometricShapes: React.FC = () => {
           <ellipse cx="60" cy="60" rx="50" ry="20" fill="none" stroke="rgba(255, 255, 255, 0.2)" strokeWidth="1" strokeDasharray="3 5" transform="rotate(30 60 60)" />
         </svg>
       </motion.div>
+
+      {/* Left Edge Blur & Gradient Bleed (ensures seamless soft transition into deep dark canvas on ultra-wide screens) */}
+      <div className="absolute inset-y-0 left-0 w-20 sm:w-36 md:w-56 lg:w-72 bg-gradient-to-r from-[#090a0c] via-[#090a0c]/80 to-transparent backdrop-blur-[2px] pointer-events-none z-10" />
+
+      {/* Right Edge Blur & Gradient Bleed (ensures seamless soft transition into deep dark canvas on ultra-wide screens) */}
+      <div className="absolute inset-y-0 right-0 w-20 sm:w-36 md:w-56 lg:w-72 bg-gradient-to-l from-[#090a0c] via-[#090a0c]/80 to-transparent backdrop-blur-[2px] pointer-events-none z-10" />
     </div>
   );
 };

@@ -203,8 +203,8 @@ export const MarqueeTicker: React.FC = () => {
       <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-[#090a0c] to-transparent z-20" />
 
       {/* Swipe Interactive Indicator Pill (Subtle visual affordance on mobile/touch) */}
-      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30 pointer-events-none hidden lg:flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-neutral-900/80 border border-neutral-800 text-[10px] font-light text-neutral-400 opacity-60 hover:opacity-100 transition-opacity">
-        <MoveHorizontal className="w-3 h-3 text-[#d85d3a]" />
+      <div className="absolute right-4 top-1/2 -translate-y-1/2 z-30 pointer-events-none hidden lg:flex items-center gap-1.5 px-3 py-1 rounded-full bg-neutral-900/90 border border-neutral-700/80 text-xs font-normal text-neutral-300 opacity-75 hover:opacity-100 transition-opacity shadow-sm">
+        <MoveHorizontal className="w-3.5 h-3.5 text-[#d85d3a]" />
         <span>SWIPE TO SCROLL</span>
       </div>
 

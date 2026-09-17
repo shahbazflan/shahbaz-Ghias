@@ -293,10 +293,10 @@ export const WorksSlider: React.FC<WorksSliderProps> = ({
                   </div>
                 )}
 
-                {/* Top Corner Badges */}
+                {/* Top Corner Badges (No 01-05 numbers) */}
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                  <span className="text-xs font-light text-neutral-200 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded border border-neutral-800">
-                    [{String(idx + 1).padStart(2, '0')}]
+                  <span className="text-xs font-light text-neutral-200 bg-black/70 backdrop-blur-md px-2.5 py-1 rounded border border-neutral-800 uppercase tracking-wider">
+                    {video.category}
                   </span>
                   <span className="text-[10px] tracking-wider uppercase bg-[#d85d3a]/90 text-white font-light px-2.5 py-0.5 rounded shadow-sm">
                     {video.year || '2025'}

@@ -79,9 +79,9 @@ export const WorksArchiveList: React.FC<WorksArchiveListProps> = ({
         )}
       </AnimatePresence>
 
-      {/* Editorial Table Header (Quentin Hocde style) */}
+      {/* Editorial Table Header */}
       <div className="grid grid-cols-12 gap-4 pb-3 border-b border-neutral-800 text-[11px] uppercase tracking-wider text-neutral-400 select-none font-light">
-        <div className="col-span-1">No.</div>
+        <div className="col-span-1 text-center">Reel</div>
         <div className="col-span-6 sm:col-span-4 lg:col-span-4">Project / Title</div>
         <div className="hidden sm:block col-span-3 lg:col-span-3">Role / Focus</div>
         <div className="hidden lg:block col-span-3">Pipeline &amp; Tools</div>
@@ -90,8 +90,7 @@ export const WorksArchiveList: React.FC<WorksArchiveListProps> = ({
 
       {/* Rows */}
       <div className="divide-y divide-neutral-800/70">
-        {videos.map((video, index) => {
-          const formattedIndex = String(index + 1).padStart(2, '0');
+        {videos.map((video) => {
           const pipeline = video.tools?.slice(0, 3).join(', ') || 'After Effects, Premiere Pro';
 
           return (
@@ -103,9 +102,9 @@ export const WorksArchiveList: React.FC<WorksArchiveListProps> = ({
               onMouseLeave={() => setHoveredVideo(null)}
               className="group grid grid-cols-12 gap-4 py-4 sm:py-4.5 items-center cursor-pointer transition-colors duration-200 hover:bg-neutral-900/50 px-2 rounded-lg"
             >
-              {/* Index Number */}
-              <div className="col-span-1 text-xs text-neutral-500 group-hover:text-[#d85d3a] transition-colors font-light">
-                {formattedIndex}
+              {/* Reel Indicator Icon */}
+              <div className="col-span-1 flex items-center justify-center">
+                <span className="w-2 h-2 rounded-full bg-neutral-600 group-hover:bg-[#d85d3a] group-hover:scale-125 transition-all" />
               </div>
 
               {/* Title */}

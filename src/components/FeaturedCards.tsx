@@ -71,7 +71,6 @@ const GatewayCardItem: React.FC<GatewayCardItemProps> = ({ card, index, onSelect
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
-  const indexFormatted = String(index + 1).padStart(2, '0');
   const specs = getCardSpecs(card.id);
 
   const updateSize = useCallback(() => {
@@ -157,21 +156,21 @@ const GatewayCardItem: React.FC<GatewayCardItemProps> = ({ card, index, onSelect
         }}
         className="group relative cursor-pointer rounded-2xl overflow-hidden bg-neutral-900/60 border border-neutral-800 hover:border-[#d85d3a]/70 shadow-xl transition-colors duration-300 flex flex-col justify-between will-change-transform transform-gpu"
       >
-        {/* 3D Flip Container: Flips completely when scrolled into view to show the image */}
+        {/* 3D Flip Container: Flips completely when scrolled into view from top or bottom to reveal the image */}
         <div className="relative aspect-[16/9] w-full [perspective:1000px] overflow-hidden bg-black">
           <motion.div
             initial={{ rotateY: 180 }}
             whileInView={{ rotateY: 0 }}
-            viewport={{ once: true, amount: 0.25 }}
+            viewport={{ once: false, amount: 0.22 }}
             transition={{
-              duration: 0.75,
-              delay: 0.12 + index * 0.14,
+              duration: 0.8,
+              delay: 0.06 + index * 0.08,
               ease: [0.23, 1, 0.32, 1],
             }}
             style={{ transformStyle: 'preserve-3d' }}
             className="relative w-full h-full"
           >
-            {/* Front Face: Image & Badges (Visible after scroll flip) */}
+            {/* Front Face: Image & Clean Discipline Badges (No numbers) */}
             <div
               style={{
                 backfaceVisibility: 'hidden',
@@ -188,18 +187,18 @@ const GatewayCardItem: React.FC<GatewayCardItemProps> = ({ card, index, onSelect
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#090a0c] via-[#090a0c]/40 to-transparent" />
 
-              {/* Index tag & Category Badge */}
+              {/* Clean Discipline & Category Badges (No 01-05 numbers) */}
               <div className="absolute top-3.5 left-3.5 right-3.5 flex items-center justify-between z-10">
-                <span className="text-[11px] font-mono text-neutral-300 bg-black/75 backdrop-blur-md px-2.5 py-0.5 rounded border border-neutral-800">
-                  [{indexFormatted}]
+                <span className="text-[11px] font-mono tracking-wider uppercase text-neutral-200 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-neutral-700/80">
+                  {card.subtitle}
                 </span>
-                <span className="text-[10px] font-mono tracking-wider uppercase bg-[#d85d3a]/90 text-white px-2.5 py-0.5 rounded shadow-sm">
+                <span className="text-[10px] font-mono tracking-wider uppercase bg-[#d85d3a] text-white font-semibold px-2.5 py-1 rounded-full shadow-md">
                   {card.tag}
                 </span>
               </div>
             </div>
 
-            {/* Back Face: High-Tech Motion HUD Specs (Flipping away upon scroll reveal) */}
+            {/* Back Face: High-Tech Motion HUD Specs (Clean aesthetic without 01-05 numbers) */}
             <div
               style={{
                 transform: 'rotateY(180deg)',
@@ -208,11 +207,6 @@ const GatewayCardItem: React.FC<GatewayCardItemProps> = ({ card, index, onSelect
               }}
               className="absolute inset-0 w-full h-full bg-gradient-to-br from-[#12141a] via-[#0c0e12] to-[#090a0c] border border-[#d85d3a]/60 p-4 sm:p-5 flex flex-col justify-between overflow-hidden shadow-inner"
             >
-              {/* Big Watermark Numeral */}
-              <div className="absolute -right-1 -bottom-3 text-7xl font-mono font-black text-neutral-800/30 pointer-events-none select-none">
-                {indexFormatted}
-              </div>
-
               {/* Top Header on Back Face */}
               <div className="relative z-10 flex items-center justify-between border-b border-neutral-800 pb-2">
                 <div className="flex items-center gap-2">
@@ -221,8 +215,8 @@ const GatewayCardItem: React.FC<GatewayCardItemProps> = ({ card, index, onSelect
                     {card.title}
                   </span>
                 </div>
-                <span className="text-[10px] font-mono text-[#d85d3a] bg-[#d85d3a]/15 px-2 py-0.5 rounded border border-[#d85d3a]/30">
-                  GATEWAY {indexFormatted}
+                <span className="text-[10px] font-mono text-[#d85d3a] bg-[#d85d3a]/15 px-2.5 py-0.5 rounded-full border border-[#d85d3a]/30 font-medium">
+                  CORE DISCIPLINE
                 </span>
               </div>
 
@@ -274,14 +268,18 @@ const GatewayCardItem: React.FC<GatewayCardItemProps> = ({ card, index, onSelect
             </p>
           </div>
 
-          <div className="pt-2.5 border-t border-neutral-800/60 flex items-center justify-between text-xs font-light">
-            <span className="text-neutral-400 group-hover:text-neutral-300 transition-colors text-[11px]">
-              ENTER DISCIPLINE
+          <div className="pt-3 border-t border-neutral-800/60 flex items-center justify-between text-xs font-light">
+            <span className="text-neutral-400 group-hover:text-neutral-200 transition-colors text-xs font-mono tracking-wider">
+              EXPLORE WORK
             </span>
-            <span className="text-[#d85d3a] font-normal group-hover:underline inline-flex items-center gap-1 text-[11px]">
-              <span>VIEW PORTFOLIO</span>
-              <ArrowRight className="w-3 h-3" />
-            </span>
+            {/* Clean, Sharp Architectural VIEW PORTFOLIO Button (No Glow/Blur) */}
+            <div className="relative group/btn">
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono font-medium uppercase tracking-wider text-white bg-[#d85d3a] hover:bg-[#c24e2d] border border-[#d85d3a]/60 group-hover/btn:border-[#d85d3a] transition-all">
+                <span className="w-1.5 h-1.5 rounded-full bg-white/90" />
+                <span>VIEW PORTFOLIO</span>
+                <ArrowRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 transition-transform" />
+              </span>
+            </div>
           </div>
         </div>
       </motion.div>
